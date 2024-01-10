@@ -3,6 +3,7 @@ import requests
 import asyncio
 from Barath import barath
 from Barath import MODULE, bot, INFO as GET_INFO
+from config import OWNER_ID
 from pyrogram import filters
 from pyrogram.types import (
     InlineQueryResultArticle,
@@ -12,7 +13,7 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
-@barath.on_message(filters.command("up", prefixes=".") & filters.me)
+@barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):
     user_id = (await GET_INFO.barath()).id
     if not message.from_user.id == user_id:
