@@ -17,7 +17,7 @@ def kela_mela(caption: str):
 def process_and_insert(photo_id, message_id, caption: str):
     # Check if photo_id already exists in the database
     if waifu_db.find_one({"id": photo_id}):
-        return f"Skipped: Photo ID - {photo_id} already exists in the database"
+        return
     
     next_word = kela_mela(caption)
     
@@ -40,4 +40,4 @@ async def modify_and_send(_, message):
         photo=photoid,
         caption=modified_info,
     )
-    asyncio.sleep(0.5)
+    await asyncio.sleep(0.5)
