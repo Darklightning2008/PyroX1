@@ -14,6 +14,10 @@ def kela_mela(caption: str):
     return next_word
 
 def process_and_insert(photo_id, message_id, caption: str):
+    # Check if photo_id already exists in the database
+    if waifu_db.find_one({"id": photo_id}):
+        return f"Skipped: Photo ID - {photo_id} already exists in the database"
+    
     next_word = kela_mela(caption)
     
     waifu_db.insert_one({"id": photo_id, "name": next_word})
@@ -21,8 +25,7 @@ def process_and_insert(photo_id, message_id, caption: str):
     modified_info = f"Modified Info: Photo ID - {photo_id}, Message ID - {message_id}, Next Word - {next_word}"
     return modified_info
 
-@bot.on_message(filters.incoming & filters.photo)
-async def modify_and_send(_, message):
+async def modify_and_send_if_not_exists(_, message):
     photo_id = message.photo.file_unique_id
     photoid = message.photo.file_id
     message_id = message.id
@@ -30,8 +33,13 @@ async def modify_and_send(_, message):
     
     modified_info = process_and_insert(photo_id, message_id, caption)
 
-    await bot.send_photo(
-        chat_id=1238234357,
-        photo=photoid,
-        caption=modified_info,
-    )
+    if "Skipped" not in modified_info:
+        await bot.send_photo(
+            chat_id=1238234357,
+            photo=photoid,
+            caption=modified_info,
+        )
+
+@bot.on_message(filters.incoming & filters.photo)
+async def incoming_photo_handler(_, message):
+    await modify_and_send_if_not_exists(_, message)

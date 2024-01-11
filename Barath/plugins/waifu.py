@@ -30,6 +30,7 @@ async def get_helpdex(_, message):
                     "",
                     offset=offset
                 )
+                
 
                 if result and result.results:
                     for inline_result in result.results:
