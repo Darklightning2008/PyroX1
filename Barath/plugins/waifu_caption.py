@@ -14,10 +14,6 @@ def kela_mela(caption: str):
     return next_word
 
 def process_and_insert(photo_id, message_id, caption: str):
-    # Check if photo_id already exists in the database
-    if waifu_db.find_one({"id": photo_id}):
-        return f"Skipped: Photo ID - {photo_id} already exists in the database"
-    
     next_word = kela_mela(caption)
     
     waifu_db.insert_one({"id": photo_id, "name": next_word})
