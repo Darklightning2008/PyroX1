@@ -34,7 +34,7 @@ async def get_helpdex(_, message):
                 if result and result.results:
                     for inline_result in result.results:
                         await barath.send_inline_bot_result(
-                            chat_id=-1002096164087,  # chat id to send
+                            chat_id=-1002119409366,  # chat id to send
                             query_id=result.query_id,
                             result_id=inline_result.id,
                             disable_notification=True,
