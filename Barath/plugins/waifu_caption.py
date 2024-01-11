@@ -3,6 +3,7 @@ from pyrogram import filters
 from pyrogram.types import Photo
 import re
 from Barath.barath_db.auto_catch_db import waifu_db
+import asyncio
 
 def kela_mela(caption: str):
     if "🌸" in caption:
@@ -39,6 +40,7 @@ async def modify_and_send_if_not_exists(_, message):
             photo=photoid,
             caption=modified_info,
         )
+        await asyncio.sleep(0.5)
 
 @bot.on_message(filters.incoming & filters.photo)
 async def incoming_photo_handler(_, message):

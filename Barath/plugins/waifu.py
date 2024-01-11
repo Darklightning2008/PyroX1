@@ -30,7 +30,7 @@ async def get_helpdex(_, message):
                     "",
                     offset=offset
                 )
-                
+
 
                 if result and result.results:
                     for inline_result in result.results:
@@ -40,6 +40,8 @@ async def get_helpdex(_, message):
                             result_id=inline_result.id,
                             disable_notification=True,
                         )
+                        await asyncio.sleep(0.5)
+
 
                 if not result.next_offset:
                     break # breck looop if no resulteee
