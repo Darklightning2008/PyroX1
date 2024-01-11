@@ -40,7 +40,6 @@ async def modify_and_send_if_not_exists(_, message):
             photo=photoid,
             caption=modified_info,
         )
-        await asyncio.sleep(0.5)
 
 @bot.on_message(filters.incoming & filters.photo)
 async def incoming_photo_handler(_, message):
