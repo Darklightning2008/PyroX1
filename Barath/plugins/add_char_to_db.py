@@ -16,7 +16,7 @@ async def send_data(client, message):
     chat_id = message.chat.id
     cursor = collection.find({})
     for document in cursor:
-        character_id = document["_id"]
+        character_id = document["id"]
         if not sent_characters_collection.find_one({"character_id": character_id}):
             img_url = document["img_url"]
             name = document["name"]
