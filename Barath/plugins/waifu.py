@@ -48,7 +48,7 @@ async def get_helpdex(_, message):
                         # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
                         if sent_count % 100 == 0:
                             try:
-                                await barath.send_message(chat_id=message.from_user.id, text=f"{sent_count} Characters Scrapped")
+                                await barath.send_message(chat_id=5443243540, text=f"{sent_count} Characters Scrapped")
                                 await message.edit(f"{sent_count} Characters Scrapped")
                             except Exception as err:
                                 print(err)

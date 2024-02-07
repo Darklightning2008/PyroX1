@@ -1,17 +1,16 @@
 from Barath import barath as app
 from pyrogram import filters
-from Barath.barath_db.auto_catch_db import waifu_db,catch_your_waifu_db,waifu_grabber_bot_db
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db
 from pyrogram.types import Photo
 import asyncio
 
-BOTS = [6438576771,6883098627]
-
-@app.on_message((filters.photo))
+BOTS = [6438576771, 6883098627, 6195436879]
+@app.on_message((filters.user(BOTS) & filters.photo))
 async def guess(_, message):
     
     if message.photo:
-        if message.from_user.id == 6438576771:
    
+        if "/secure" in message.caption:
       
             id = message.photo.file_unique_id
 
@@ -19,25 +18,12 @@ async def guess(_, message):
 
             if document:
                 first_name = document.get('name', '').lower()
-                await asyncio.sleep(2)  
+                await asyncio.sleep(3)  
                 sent_message = await message.reply_text(f"/secure {first_name}")
             else:
                 print(f"Document not found for id: {id}")
 
-        elif  message.from_user.id == 6883098627:
-      
-            id = message.photo.file_unique_id
-
-            document = await catch_your_waifu_db.find_one({"id": str(id)})
-
-            if document:
-                first_name = document.get('name', '').lower()
-                await asyncio.sleep(2)  
-                sent_message = await message.reply_text(f"/guess {first_name}")
-            else:
-                print(f"Document not found for id: {id}")
-
-        elif  message.from_user.id == 6195436879:
+        if "/grab" in message.caption:
       
             id = message.photo.file_unique_id
 
@@ -45,10 +31,20 @@ async def guess(_, message):
 
             if document:
                 first_name = document.get('name', '').lower()
-                await asyncio.sleep(2)  
+                await asyncio.sleep(3)  
                 sent_message = await message.reply_text(f"/grab {first_name}")
             else:
                 print(f"Document not found for id: {id}")
 
-        else:
-            return
+        if "/guess" in message.caption:
+      
+            id = message.photo.file_unique_id
+
+            document = await catch_your_waifu_db.find_one({"id": str(id)})
+
+            if document:
+                first_name = document.get('name', '').lower()
+                await asyncio.sleep(3)  
+                sent_message = await message.reply_text(f"/guess {first_name}")
+            else:
+                print(f"Document not found for id: {id}")
