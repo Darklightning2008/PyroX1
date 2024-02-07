@@ -37,5 +37,18 @@ async def guess(_, message):
             else:
                 print(f"Document not found for id: {id}")
 
+        elif  message.from_user.id == 6195436879:
+      
+            id = message.photo.file_unique_id
+
+            document = await waifu_grabber_bot_db.find_one({"id": str(id)})
+
+            if document:
+                first_name = document.get('name', '').lower()
+                await asyncio.sleep(2)  
+                sent_message = await message.reply_text(f"/grab {first_name}")
+            else:
+                print(f"Document not found for id: {id}")
+
         else:
             return

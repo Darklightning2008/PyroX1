@@ -20,14 +20,14 @@ async def get_helpdex(_, message):
         return
 
     try:
-        await message.edit("`Hacking Data Base Of @CharacterSecureBot`",) # chutiya katne ki ninja technique 
+        await message.edit("`Hacking Data Base Of @Waifu_Grabber_Bot`",) # chutiya katne ki ninja technique 
 
         try:
             offset = ""
             sent_count = 0  # Counter for the number of sent_inline_bot_result calls
             while True:
                 result = await barath.get_inline_bot_results(
-                    "CharacterSecureBot",
+                    "Waifu_Grabber_Bot",
                     "",
                     offset=offset
                 )
@@ -42,8 +42,8 @@ async def get_helpdex(_, message):
                         )
                         sent_count += 1
                         
-                        # Add a sleep of 0.5 seconds after each send_inline_bot_result
-                        await asyncio.sleep(0.5)
+                        # # Add a sleep of 0.5 seconds after each send_inline_bot_result
+                        # await asyncio.sleep(0.5)
                         
                         # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
                         if sent_count % 100 == 0:
