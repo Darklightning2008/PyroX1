@@ -34,6 +34,6 @@ async def send_data(client, message):
             
             # Recording sent character's ID in collection
             sent_characters_collection.insert_one({"character_id": character_id})
-            asyncio.sleep(3)
+            asyncio.sleep(7)
 
 
