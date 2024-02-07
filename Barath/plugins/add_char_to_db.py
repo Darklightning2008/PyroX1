@@ -27,13 +27,13 @@ async def send_data(client, message):
             if rarity == "⛄ Winters[S]":
                 new_rarity = 1
             elif rarity == "🧧 New Year[LE]":
-                new_rarity = 2
+                new_rarity = 3
             
             # Sending data
-            sent_message = await client.send_photo(chat_id=message.chat.id, photo=img_url, caption=f"/event {img_url} {name_new} {anime_new} {new_rarity}")
+            sent_message = await client.send_message(chat_id=message.chat.id, photo=img_url, caption=f"/event {img_url} {name_new} {anime_new} {new_rarity}")
             
             # Recording sent character's ID in collection
-            sent_characters_collection.insert_one({"character_id": character_id, "sent_message_id": sent_message.message_id})
+            sent_characters_collection.insert_one({"character_id": character_id})
             asyncio.sleep(3)
 
 
