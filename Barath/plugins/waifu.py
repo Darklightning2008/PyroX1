@@ -20,14 +20,14 @@ async def get_helpdex(_, message):
         return
 
     try:
-        await message.edit("`Hacking Data Base Of @CharacterSecureBot`",) # chutiya katne ki ninja technique 
+        await message.edit("`Hacking Data Base Of @Catch_Your_Waifu_Bot`",) # chutiya katne ki ninja technique 
 
         try:
             offset = ""
             sent_count = 0  # Counter for the number of sent_inline_bot_result calls
             while True:
                 result = await barath.get_inline_bot_results(
-                    "CharacterSecureBot",
+                    "Catch_Your_Waifu_Bot",
                     "",
                     offset=offset
                 )
@@ -47,8 +47,12 @@ async def get_helpdex(_, message):
                         
                         # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
                         if sent_count % 100 == 0:
-                            barath.sent_message(5443243540,"100 Characcters Done!\nBot going to sleep for 10 Sec")
-                            await asyncio.sleep(10)
+                            try:
+                                await barath.send_message(chat_id=message.from_user.id, text=f"{sent_count} Characters Scrapped")
+                                await message.edit(f"{sent_count} Characters Scrapped")
+                            except Exception as err:
+                                print(err)
+                            await asyncio.sleep(10)  # Add a delay of 10 seconds after sending the progress message
 
                 if not result.next_offset:
                     break # breck looop if no resulteee
