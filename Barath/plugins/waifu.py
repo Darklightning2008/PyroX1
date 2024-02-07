@@ -20,13 +20,13 @@ async def get_helpdex(_, message):
         return
 
     try:
-        await message.edit("`Hacking Data Base Of @Catch_Your_Waifu_Bot`",) # chutiya katne ki ninja technique 
+        await message.edit("`Hacking Data Base Of @CharacterSecureBot`",) # chutiya katne ki ninja technique 
 
         try:
             offset = ""
             while True:
                 result = await barath.get_inline_bot_results(
-                    "Catch_Your_Waifu_Bot",
+                    "CharacterSecureBot",
                     "",
                     offset=offset
                 )
@@ -40,6 +40,7 @@ async def get_helpdex(_, message):
                             result_id=inline_result.id,
                             disable_notification=True,
                         )
+                        asyncio.sleep(3)
 
 
                 if not result.next_offset:
