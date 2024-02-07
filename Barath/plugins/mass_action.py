@@ -2,7 +2,7 @@ from pyrogram import filters
 from pyrogram import enums
 from pyrogram.types import *
 from Barath import barath as bot
-from config import HANDLER
+from config import HANDLER,OWNER_ID
 
 async def is_owner(chat_id: int, user_id: int):
     async for x in bot.get_chat_members(chat_id):
@@ -17,7 +17,7 @@ async def is_owner(chat_id: int, user_id: int):
 async def unbanall(_, message):
      user_id = message.from_user.id
      chat_id = message.chat.id
-     if user_id !=5443243540 and (await is_owner(chat_id,user_id)) == False:
+     if user_id not in OWNER_ID and (await is_owner(chat_id,user_id)) == False:
           return await message.reply("`You Can't Access This!`")
      elif message.chat.type == enums.ChatType.PRIVATE:
           return await message.reply("`This Command Only work in Groups!`")
@@ -38,7 +38,7 @@ async def unbanall(_, message):
 async def banall(_, message):
     chat_id = message.chat.id
     user_id = message.from_user.id
-    if user_id !=5443243540 and (await is_owner(chat_id,user_id)) == False:
+    if user_id not in OWNER_ID and (await is_owner(chat_id,user_id)) == False:
          return await message.reply("`You Can't Access This!`")
     elif message.chat.type == enums.ChatType.PRIVATE:
          return await message.reply("`This Command Only work in Groups!`")
@@ -66,7 +66,7 @@ async def banall(_, message):
 async def kickall(_, message):
     chat_id = message.chat.id
     user_id = message.from_user.id
-    if user_id !=5443243540 and (await is_owner(chat_id,user_id)) == False:
+    if user_id not in OWNER_ID and (await is_owner(chat_id,user_id)) == False:
           return await message.reply("`You Can't Access This!`")
     elif message.chat.type == enums.ChatType.PRIVATE:
           return await message.reply("`This Command Only work in Groups!`")
@@ -96,7 +96,7 @@ async def kickall(_, message):
 async def unbanchannel(_, message):
     user_id = message.from_user.id
     chat_id = -1001809308823
-    if user_id != 5443243540 and (await is_owner(chat_id, user_id)) == False:
+    if user_id not in OWNER_ID and (await is_owner(chat_id, user_id)) == False:
         return await message.reply("`You Can't Access This!`")
     elif message.chat.type not in [enums.ChatType.CHANNEL, enums.ChatType.SUPERGROUP]:
         return await message.reply("`This Command Only works in Channels or Supergroups!`")

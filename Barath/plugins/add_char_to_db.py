@@ -11,7 +11,7 @@ collection = db["Event_Collection"]
 sent_characters_collection = db["sent_characters"]
 
 # Command to send data from collection
-@barath.on_message(filters.command("add_characters", prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("addchar", HANDLER) & filters.me)
 async def send_data(client, message):
     cursor = collection.find({})
     for document in cursor:
