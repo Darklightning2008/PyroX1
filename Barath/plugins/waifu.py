@@ -16,21 +16,21 @@ from pyrogram.types import (
 @barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):
     user_id = (await GET_INFO.barath()).id
-    if not message.from_user.id == user_id:
+    if message.from_user.id not in OWNER_ID:
         return
 
     try:
-        await message.edit("`Hacking Data Base Of @Catch_Your_Waifu_Bot`",) # chutiya katne ki ninja technique 
+        await message.edit("`Hacking Data Base Of @CharacterSecureBot`",) # chutiya katne ki ninja technique 
 
         try:
             offset = ""
+            sent_count = 0  # Counter for the number of sent_inline_bot_result calls
             while True:
                 result = await barath.get_inline_bot_results(
-                    "Catch_Your_Waifu_Bot",
+                    "CharacterSecureBot",
                     "",
                     offset=offset
                 )
-
 
                 if result and result.results:
                     for inline_result in result.results:
@@ -40,8 +40,15 @@ async def get_helpdex(_, message):
                             result_id=inline_result.id,
                             disable_notification=True,
                         )
-                        await asyncio.sleep(2)
-
+                        sent_count += 1
+                        
+                        # Add a sleep of 0.5 seconds after each send_inline_bot_result
+                        await asyncio.sleep(0.5)
+                        
+                        # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
+                        if sent_count % 100 == 0:
+                            barath.sent_message(5443243540,"100 Characcters Done!\nBot going to sleep for 10 Sec")
+                            await asyncio.sleep(10)
 
                 if not result.next_offset:
                     break # breck looop if no resulteee

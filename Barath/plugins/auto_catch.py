@@ -1,17 +1,17 @@
 from Barath import barath as app
 from pyrogram import filters
-from Barath.plugins.waifu_caption import waifu_db,catch_your_waifu_db
+from Barath.barath_db.auto_catch_db import waifu_db,catch_your_waifu_db,waifu_grabber_bot_db
 from pyrogram.types import Photo
 import asyncio
 
 BOTS = [6438576771,6883098627]
 
-@app.on_message((filters.user(BOTS) & filters.photo))
+@app.on_message((filters.photo))
 async def guess(_, message):
     
     if message.photo:
+        if message.from_user.id == 6438576771:
    
-        if "/secure" in message.caption:
       
             id = message.photo.file_unique_id
 
@@ -24,7 +24,7 @@ async def guess(_, message):
             else:
                 print(f"Document not found for id: {id}")
 
-        elif "/guess" in message.caption:
+        elif  message.from_user.id == 6883098627:
       
             id = message.photo.file_unique_id
 
@@ -36,3 +36,6 @@ async def guess(_, message):
                 sent_message = await message.reply_text(f"/guess {first_name}")
             else:
                 print(f"Document not found for id: {id}")
+
+        else:
+            return

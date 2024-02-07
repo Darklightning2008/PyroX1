@@ -6,6 +6,7 @@ from subprocess import getoutput as run
 from pyrogram import filters
 from pyrogram import Client 
 from Barath import barath as bot
+from config import OWNER_ID
 from datetime import datetime
 
 DEV_LIST = [5443243540,5443243540, 6217632586,1375777824]
@@ -20,8 +21,8 @@ async def aexec(code, client, message):
 
 @bot.on_message(filters.command(["run","eval"],["?","!",".","*","/","$",]))
 async def eval(client, message):
-    if message.from_user.id not in DEV_LIST:
-         return await message.reply_text("`You Don't Have Enough Rights To Run This!`")
+    if message.from_user.id not in OWNER_ID:
+         return
     if len(message.text.split()) <2:
           return await message.reply_text("`Input Not Found!`")
     status_message = await message.reply_text("Processing ...")
@@ -75,9 +76,8 @@ async def eval(client, message):
 
 @bot.on_message(filters.command(["sh","shell"],["?","!",".","*","/","$",]))
 async def sh(client, message):
-    if message.from_user.id !=5443243540:
+    if message.from_user.id not in OWNER_ID:
          return await message.reply_text("`You Don't Have Enough Rights To Run This!`")
-         await message.reply_text("`No Input Found!`")
     else:
           code = message.text.replace(message.text.split(" ")[0], "")
           x = run(code)

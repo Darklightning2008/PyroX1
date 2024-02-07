@@ -2,7 +2,7 @@ from Barath import bot
 from pyrogram import filters
 from pyrogram.types import Photo
 import re
-from Barath.barath_db.auto_catch_db import catch_your_waifu_db as waifu_db
+from Barath.barath_db.auto_catch_db import waifu_db
 
 def kela_mela(caption: str):
     if "🌸" in caption:
