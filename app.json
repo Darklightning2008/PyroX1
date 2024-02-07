@@ -10,22 +10,22 @@
 "env": {
     "API_ID": {
       "description": "api id get from my.telegram.org/apps",
-      "value": "",
+      "value": "28122413",
       "required": true
     },
     "API_HASH": {
       "description": "api hash get from my.telegram.org/app",
-      "value": "",
+      "value": "750432c8e1b221f91fd2c93a92710093",
       "required": true
     },
     "SESSION": {
       "description": "Pyrogram String Session",
-      "value": "",
+      "value": "BQGtHS0ASRXJubr7sC7vJLoLlFz7n6LYwBGAEEAIgCpmiDiOBZMxYbJF3dqaO2qh5fHE_xSwuUo63h4ZaE5Q8sghJEOTlKAwrxWsaq0cZv1aA40fRjNBz9m1bDep-r8DW9qRsGCHkAmcze2P3s4q7YnrfWdJ9A9uCgU2JT2ojTmd55_FBLI3XhOwMc9u7luyEidFKmGUrXCeMs22FOeBxfcWRbacqqSfQLpacddAftN57NftEJHdTz95W55FtqPNQ_k1ABlD6DcZ96ooWY-bhmQcJUTy-kusGCt0rH6Q6E6u9zov58EVPFDGtEBi4PnXUVdGjsXPef_93XVUjxWZGz6M8BASuwAAAABJzfT1AA",
       "required": true
     },
     "TOKEN": {
        "description": "create your bot in @botfather",
-       "value": "5607648274:AAGFtBVHU-0jOfzX-vGxRiKsf-4GWbJ1YZ4",
+       "value": "5607648274:AAEXnN_zouqlfhux75RqiR9xLOtz-fufVqg",
        "required": true
     }
 }}
