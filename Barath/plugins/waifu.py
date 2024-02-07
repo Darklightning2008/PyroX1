@@ -20,13 +20,13 @@ async def get_helpdex(_, message):
         return
 
     try:
-        await message.edit("`Hacking Data Base Of @CharacterSecureBot`",) # chutiya katne ki ninja technique 
+        await message.edit("`Hacking Data Base Of @Catch_Your_Waifu_Bot`",) # chutiya katne ki ninja technique 
 
         try:
             offset = ""
             while True:
                 result = await barath.get_inline_bot_results(
-                    "CharacterSecureBot",
+                    "Catch_Your_Waifu_Bot",
                     "",
                     offset=offset
                 )
