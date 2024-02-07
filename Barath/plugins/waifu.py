@@ -20,14 +20,14 @@ async def get_helpdex(_, message):
         return
 
     try:
-        await message.edit("`Hacking Data Base Of @Catch_Your_Waifu_Bot`",) # chutiya katne ki ninja technique 
+        await message.edit("`Hacking Data Base Of @CharacterSecureBot`",) # chutiya katne ki ninja technique 
 
         try:
             offset = ""
             sent_count = 0  # Counter for the number of sent_inline_bot_result calls
             while True:
                 result = await barath.get_inline_bot_results(
-                    "Catch_Your_Waifu_Bot",
+                    "CharacterSecureBot",
                     "",
                     offset=offset
                 )
