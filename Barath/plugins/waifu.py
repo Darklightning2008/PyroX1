@@ -40,7 +40,7 @@ async def get_helpdex(_, message):
                             result_id=inline_result.id,
                             disable_notification=True,
                         )
-                        asyncio.sleep(3)
+                        await asyncio.sleep(3)
 
 
                 if not result.next_offset:
