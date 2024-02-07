@@ -6,7 +6,7 @@ import asyncio
 
 # Initialize MongoDB client
 mongo_client = pymongo.MongoClient("mongodb+srv://HaremDBBot:ThisIsPasswordForHaremDB@haremdb.swzjngj.mongodb.net/?retryWrites=true&w=majority")
-db = mongo_client["your_database"]
+db = mongo_client["Character_catcher"]
 collection = db["Event_Collection"]
 sent_characters_collection = db["sent_characters"]
 
