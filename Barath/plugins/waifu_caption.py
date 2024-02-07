@@ -6,7 +6,7 @@ from Barath.barath_db.auto_catch_db import waifu_grabber_bot_db as waifu_db
 
 def kela_mela(caption: str):
     if "🌸" in caption:
-        next_word = re.search(r'🌸:\s*([^\d\s]+)', caption)
+        next_word = re.search(r':\s*([^\d\s]+)', caption)
         next_word = next_word.group(1) if next_word else "nothing"
     else:
         next_word = "nothing"
