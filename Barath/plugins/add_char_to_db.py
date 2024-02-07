@@ -13,6 +13,7 @@ sent_characters_collection = db["sent_characters"]
 # Command to send data from collection
 @barath.on_message(filters.command("addchar", HANDLER) & filters.me)
 async def send_data(client, message):
+    chat_id = message.chat.id
     cursor = collection.find({})
     for document in cursor:
         character_id = document["_id"]
@@ -34,6 +35,6 @@ async def send_data(client, message):
             
             # Recording sent character's ID in collection
             sent_characters_collection.insert_one({"character_id": character_id})
-            asyncio.sleep(7)
-
-
+            
+            # Adding delay of 5 seconds
+            await asyncio.sleep(5)
