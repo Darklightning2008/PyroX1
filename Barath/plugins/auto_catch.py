@@ -1,6 +1,6 @@
 from Barath import barath as app
 from pyrogram import filters
-from Barath.plugins.waifu_caption import waifu_db
+from Barath.plugins.waifu_caption import waifu_db,catch_your_waifu_db
 from pyrogram.types import Photo
 import asyncio
 
@@ -28,7 +28,7 @@ async def guess(_, message):
       
             id = message.photo.file_unique_id
 
-            document = await waifu_db.find_one({"id": str(id)})
+            document = await catch_your_waifu_db.find_one({"id": str(id)})
 
             if document:
                 first_name = document.get('name', '').lower()
