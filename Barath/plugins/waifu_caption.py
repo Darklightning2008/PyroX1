@@ -15,7 +15,7 @@ def kela_mela(caption: str):
         next_word = next_word.group(1).split()[0] if next_word else "nothing"
     else:
         next_word = "nothing"
-    
+
     return next_word.strip()
 
 
