@@ -3,10 +3,14 @@ from pyrogram import filters
 from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db
 from pyrogram.types import Photo
 import asyncio
+from Barath.plugins.toggles import check_command_status
 
 BOTS = [6438576771, 6883098627, 6195436879]
 @app.on_message((filters.user(BOTS) & filters.photo))
 async def guess(_, message):
+    autoCatch_enabled = await check_command_status("autocatch")
+    if not autoCatch_enabled:
+        return
     
     if message.photo:
    
