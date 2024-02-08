@@ -15,7 +15,7 @@ async def guess(_, message):
         return
     
     chat_id = message.chat.id
-    if not is_group_banned(chat_id):
+    if not await is_group_banned(chat_id):
         return
     if message.photo:
    
