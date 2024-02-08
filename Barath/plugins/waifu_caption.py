@@ -6,15 +6,15 @@ from Barath.barath_db.auto_catch_db import Hunt_Your_Waifu_Bot_db as waifu_db
 
 import re
 
-import re
-
 def kela_mela(caption: str):
     if "🌸" in caption:
         next_word = re.search(r':\s*([^\d\s]+)', caption)
         next_word = next_word.group(1).split()[0] if next_word else "nothing"
-    else:
-        next_word = re.search(r'ɴᴀᴍᴇ\s*:\s*([^\n]+)', caption)
+    elif re.search(r'\n\d+:', caption):  # Check if the caption contains a line starting with a number followed by a colon
+        next_word = re.search(r'\n\d+:\s*([^\n]+)', caption)
         next_word = next_word.group(1).split()[0] if next_word else "nothing"
+    else:
+        next_word = "nothing"
     
     return next_word.strip()
 
