@@ -1,7 +1,7 @@
 from Barath import cli
 
 waifu_db = cli["Kira_DB"]["CharacterSecureBot"]
-
+allow_chats_collection  = cli["Kira_DB"]["Allow_Chats"]
 toggle_db = cli["Kira_DB"]["Toggle_DB"]
 
 catch_your_waifu_db = cli["Kira_DB"]["Catch_Your_Waifu_Bot"]
