@@ -25,7 +25,7 @@ async def fetch_banned_groups():
     return banned_groups
 
 
-@app.on_message(filters.command(["include"]) & filters.user(OWNER_ID))
+@barath.on_message(filters.command(["include"]) & filters.user(OWNER_ID))
 async def ban_group(_, message):
     idd = message.from_user.id
     if idd not in OWNER_ID:
@@ -43,7 +43,7 @@ async def ban_group(_, message):
         await message.reply_text("Please provide the group ID. Example: `/include -1001830463327`")
 
 
-@app.on_message(filters.command("exclude")& filters.user(OWNER_ID))
+@barath.on_message(filters.command("exclude")& filters.user(OWNER_ID))
 async def unban_group(_, message):
     idd = message.from_user.id
     if idd not in OWNER_ID:
@@ -62,7 +62,7 @@ async def unban_group(_, message):
     except Exception as e:
         await message.reply_text(f"Error unbanning group: {e}")
 
-@app.on_message(filters.command("allow_chats"))
+@barath.on_message(filters.command("allow_chats")& filters.user(OWNER_ID))
 async def get_banned_groups(_, message):
     idd = message.from_user.id
     if idd not in OWNER_ID:
@@ -71,7 +71,7 @@ async def get_banned_groups(_, message):
         banned_groups = await fetch_banned_groups()
         if banned_groups:
             banned_groups_list = "\n".join(banned_groups)
-            await barath.reply_text(banned_groups_list)
+            await message.reply_text(banned_groups_list)
         else:
             await message.reply("No groups are currently banned.")
     except Exception as e:
