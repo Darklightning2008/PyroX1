@@ -5,7 +5,7 @@ from requests import get
 import os
 import config
 
-from barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,Hunt_Your_Waifu_Bot_db,catch_your_waifu_db
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,Hunt_Your_Waifu_Bot_db,catch_your_waifu_db
 
 @barath.on_message(filters.user(config.OWNER_ID) & filters.command("agstats",prefixes=config.HANDLER))
 async def agstats(_, message):
