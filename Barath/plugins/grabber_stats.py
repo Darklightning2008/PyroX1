@@ -1,5 +1,5 @@
 from pyrogram import filters 
-from Barath import barath, MODULE
+from Barath import barath
 from requests import get
 
 import os
