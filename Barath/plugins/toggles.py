@@ -33,9 +33,9 @@ async def toggle_command_enable(client, message):
     else:
         try:
             await toggle_db.update_one({'command_name': command_name}, {'$set': {'enabled': True}})
-            message.reply_text(f"The command {command_name} is enabled Successfully!")
+            await message.reply_text(f"The command {command_name} is enabled Successfully!")
         except Exception as err:
-            message.reply_text(err)
+            await message.reply_text(err)
 
 @bot.on_message(filters.command("disable") & filters.user(OWNER_ID))
 async def toggle_command_enable(client, message):
@@ -53,7 +53,7 @@ async def toggle_command_enable(client, message):
     else:
         try:
             await toggle_db.update_one({'command_name': command_name}, {'$set': {'enabled': False}})
-            message.reply_text(f"The command {command_name} is enabled Successfully!")
+            await message.reply_text(f"The command {command_name} is enabled Successfully!")
         except Exception as err:
-            message.reply_text(err)
+            await message.reply_text(err)
     
