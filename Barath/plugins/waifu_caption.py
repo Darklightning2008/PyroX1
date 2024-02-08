@@ -2,12 +2,13 @@ from Barath import bot
 from pyrogram import filters
 from pyrogram.types import Photo
 import re
-from Barath.barath_db.auto_catch_db import catch_your_waifu_db as waifu_db
-
-import re
+from Barath.barath_db.auto_catch_db import WaifuXBharatBot_db as waifu_db
 
 def kela_mela(caption: str):
     if "🌸" in caption:
+        next_word = re.search(r':\s*([^\d\s]+)', caption)
+        next_word = next_word.group(1).split()[0] if next_word else "nothing"
+    elif "💠|" in caption:
         next_word = re.search(r':\s*([^\d\s]+)', caption)
         next_word = next_word.group(1).split()[0] if next_word else "nothing"
     elif re.search(r'\n\d+:', caption):  # Check if the caption contains a line starting with a number followed by a colon
