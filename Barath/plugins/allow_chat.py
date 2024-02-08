@@ -25,7 +25,7 @@ async def fetch_banned_groups():
     return banned_groups
 
 
-@barath.on_message(filters.command(["include"]) & filters.user(OWNER_ID))
+@app.on_message(filters.command(["include"]) & filters.user(OWNER_ID))
 async def ban_group(_, message):
     idd = message.from_user.id
     if idd not in OWNER_ID:
