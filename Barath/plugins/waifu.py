@@ -13,6 +13,8 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
+TARGET_BOT = "Hunt_Your_Waifu_Bot"
+
 @barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):
     user_id = (await GET_INFO.barath()).id
@@ -20,14 +22,15 @@ async def get_helpdex(_, message):
         return
 
     try:
-        await message.edit("Hacking Data Base Of @Waifu_Grabber_Bot",) # chutiya katne ki ninja technique 
+        await message.edit(f"Hacking Data Base Of @{TARGET_BOT}",) # chutiya katne ki ninja technique 
 
         try:
             offset = ""
             sent_count = 0  # Counter for the number of sent_inline_bot_result calls
+            total_scrapped = 0  # Counter for the total number of characters scrapped
             while True:
                 result = await barath.get_inline_bot_results(
-                    "Waifu_Grabber_Bot",
+                    TARGET_BOT,
                     "",
                     offset=offset
                 )
@@ -41,9 +44,8 @@ async def get_helpdex(_, message):
                             disable_notification=True,
                         )
                         sent_count += 1
-                        
-                        # # Add a sleep of 0.5 seconds after each send_inline_bot_result
-                        # await asyncio.sleep(0.5)
+                        total_scrapped += 1
+                        await asyncio.sleep(0.5)
                         
                         # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
                         if sent_count % 100 == 0:
@@ -58,6 +60,13 @@ async def get_helpdex(_, message):
                     break # breck looop if no resulteee
 
                 offset = result.next_offset
+
+            # Display the total number of characters scrapped when the scrapping is done
+            try:
+                await barath.send_message(chat_id=5443243540, text=f"Done! Total {total_scrapped} Characters Scrapped")
+            except Exception as err:
+                print(err)
+            await message.edit(f"Done! Total {total_scrapped} Characters Scrapped")
 
         except Exception as e:
             print(f"Error: {e}")

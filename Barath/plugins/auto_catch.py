@@ -18,8 +18,11 @@ async def guess(_, message):
 
             if document:
                 first_name = document.get('name', '').lower()
-                await asyncio.sleep(3)  
-                sent_message = await message.reply_text(f"/secure {first_name}")
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/secure {first_name}")
             else:
                 print(f"Document not found for id: {id}")
 
@@ -31,8 +34,11 @@ async def guess(_, message):
 
             if document:
                 first_name = document.get('name', '').lower()
-                await asyncio.sleep(3)  
-                sent_message = await message.reply_text(f"/grab {first_name}")
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/grab {first_name}")
             else:
                 print(f"Document not found for id: {id}")
 
@@ -44,7 +50,10 @@ async def guess(_, message):
 
             if document:
                 first_name = document.get('name', '').lower()
-                await asyncio.sleep(3)  
-                sent_message = await message.reply_text(f"/guess {first_name}")
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/guess {first_name}")
             else:
                 print(f"Document not found for id: {id}")
