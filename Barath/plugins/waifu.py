@@ -13,7 +13,7 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
-TARGET_BOT = "Hunt_Your_Waifu_Bot"
+TARGET_BOT = "Character_Catcher_Bot"
 
 @barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):

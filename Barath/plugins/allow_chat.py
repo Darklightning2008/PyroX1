@@ -61,3 +61,18 @@ async def unban_group(_, message):
             await message.reply("Please provide the group ID.")
     except Exception as e:
         await message.reply_text(f"Error unbanning group: {e}")
+
+@app.on_message(filters.command("allow_chats"))
+async def get_banned_groups(_, message):
+    idd = message.from_user.id
+    if idd not in OWNER_ID:
+        return
+    try:
+        banned_groups = await fetch_banned_groups()
+        if banned_groups:
+            banned_groups_list = "\n".join(banned_groups)
+            await barath.reply_text(banned_groups_list)
+        else:
+            await message.reply("No groups are currently banned.")
+    except Exception as e:
+        await message.reply_text(f"Error getting banned groups: {e}")

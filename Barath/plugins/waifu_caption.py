@@ -2,19 +2,22 @@ from Barath import bot
 from pyrogram import filters
 from pyrogram.types import Photo
 import re
-from Barath.barath_db.auto_catch_db import Hunt_Your_Waifu_Bot_db as waifu_db
+from Barath.barath_db.auto_catch_db import Character_Catcher_Bot_db as waifu_db
+
+import re
 
 import re
 
 def kela_mela(caption: str):
-    if "🌸" in caption:  # Assuming "🌸" is the marker for the first type of caption
+    if "🌸" in caption:
         next_word = re.search(r':\s*([^\d\s]+)', caption)
-        next_word = next_word.group(1) if next_word else "nothing"
+        next_word = next_word.group(1).split()[0] if next_word else "nothing"
     else:
-        next_word = re.search(r'\n\d+:?\s*([^\n]+)', caption)
+        next_word = re.search(r'ɴᴀᴍᴇ\s*:\s*([^\n]+)', caption)
         next_word = next_word.group(1).split()[0] if next_word else "nothing"
     
-    return next_word
+    return next_word.strip()
+
 
 
 def process_and_insert(photo_id, message_id, caption: str):

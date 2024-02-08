@@ -88,3 +88,28 @@ async def guess(_, message):
                     sent_message = await message.reply_text(f"/hunt {first_name}")
             else:
                 print(f"Document not found for id: {id}")
+        if "/hunt" in message.caption:
+            id = message.photo.file_unique_id
+            document = await Hunt_Your_Waifu_Bot_db.find_one({"id": str(id)})
+            if document:
+                first_name = document.get('name', '').lower()
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/hunt {first_name}")
+            else:
+                print(f"Document not found for id: {id}")
+
+        if "/collect" in message.caption:
+            id = message.photo.file_unique_id
+            document = await Hunt_Your_Waifu_Bot_db.find_one({"id": str(id)})
+            if document:
+                first_name = document.get('name', '').lower()
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/collect {first_name}")
+            else:
+                print(f"Document not found for id: {id}")
