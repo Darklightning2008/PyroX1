@@ -1,6 +1,6 @@
 from Barath import bot as app
 from Barath import barath
-from config import OWNER_ID
+from config import OWNER_ID,HANDLER
 from Barath.barath_db.auto_catch_db import allow_chats_collection
 from pyrogram import filters
 
@@ -25,7 +25,7 @@ async def fetch_banned_groups():
     return banned_groups
 
 
-@barath.on_message(filters.command(["include"]) & filters.user(OWNER_ID))
+@barath.on_message(filters.command(["include"],prefixes=HANDLER) & filters.user(OWNER_ID))
 async def ban_group(_, message):
     idd = message.from_user.id
     if idd not in OWNER_ID:
@@ -33,6 +33,9 @@ async def ban_group(_, message):
 
     if len(message.command) > 1:
         group_id = int(message.command[1])
+        group = await is_group_banned(group_id)
+        if  group:
+            return message.reply_text(f"Group is already into include  list")
         try:
             await add_to_banned_groups(group_id)
             await message.reply_text(f"Group {group_id} is set to auto catch")
@@ -42,7 +45,7 @@ async def ban_group(_, message):
         await message.reply_text("Please provide the group ID. Example: `/include -1001830463327`")
 
 
-@barath.on_message(filters.command("exclude")& filters.user(OWNER_ID))
+@barath.on_message(filters.command("exclude",prefixes=HANDLER)& filters.user(OWNER_ID))
 async def unban_group(_, message):
     idd = message.from_user.id
     if idd not in OWNER_ID:
@@ -61,7 +64,7 @@ async def unban_group(_, message):
     except Exception as e:
         await message.reply_text(f"Error unbanning group: {e}")
 
-@barath.on_message(filters.command("allow_chats")& filters.user(OWNER_ID))
+@barath.on_message(filters.command("allow_chats",prefixes=HANDLER)& filters.user(OWNER_ID))
 async def get_banned_groups(_, message):
     idd = message.from_user.id
     if idd not in OWNER_ID:
