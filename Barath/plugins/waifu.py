@@ -13,7 +13,7 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
-TARGET_BOT = "Character_Catcher_Bot"
+TARGET_BOT = "Hunt_Your_Waifu_Bot"
 
 @barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):
@@ -49,11 +49,7 @@ async def get_helpdex(_, message):
                         
                         # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
                         if sent_count % 100 == 0:
-                            try:
-                                await barath.send_message(chat_id=5443243540, text=f"{sent_count} Characters Scrapped")
-                                await message.edit(f"{sent_count} Characters Scrapped")
-                            except Exception as err:
-                                print(err)
+                            await message.edit(f"{sent_count} Characters Scrapped")
                             await asyncio.sleep(10)  # Add a delay of 10 seconds after sending the progress message
 
                 if not result.next_offset:
@@ -62,11 +58,8 @@ async def get_helpdex(_, message):
                 offset = result.next_offset
 
             # Display the total number of characters scrapped when the scrapping is done
-            try:
-                await barath.send_message(chat_id=5443243540, text=f"Done! Total {total_scrapped} Characters Scrapped")
-            except Exception as err:
-                print(err)
             await message.edit(f"Done! Total {total_scrapped} Characters Scrapped")
+
 
         except Exception as e:
             print(f"Error: {e}")

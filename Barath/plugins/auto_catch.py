@@ -6,7 +6,7 @@ from pyrogram.types import Photo
 import asyncio
 from Barath.plugins.toggles import check_command_status
 
-BOTS = [6438576771, 6883098627, 6195436879]
+BOTS = [6438576771,6883098627,6195436879,6816539294,6157455819]
 @app.on_message((filters.user(BOTS) & filters.photo))
 async def guess(_, message):
     

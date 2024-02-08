@@ -43,6 +43,7 @@ async def ban_group(_, message):
             await message.reply_text(f"Error banning group: {e}")
     else:
         await message.reply_text("Please provide the group ID. Example: `/include -1001830463327`")
+    message.delete()
 
 
 @barath.on_message(filters.command("exclude",prefixes=HANDLER)& filters.user(OWNER_ID))
@@ -63,6 +64,7 @@ async def unban_group(_, message):
             await message.reply("Please provide the group ID.")
     except Exception as e:
         await message.reply_text(f"Error unbanning group: {e}")
+    message.delete()
 
 @barath.on_message(filters.command("allow_chats",prefixes=HANDLER)& filters.user(OWNER_ID))
 async def get_banned_groups(_, message):
@@ -78,3 +80,4 @@ async def get_banned_groups(_, message):
             await message.reply("No groups are currently banned.")
     except Exception as e:
         await message.reply_text(f"Error getting banned groups: {e}")
+    message.delete()

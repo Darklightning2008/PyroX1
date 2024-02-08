@@ -2,7 +2,7 @@ from Barath import bot
 from pyrogram import filters
 from pyrogram.types import Photo
 import re
-from Barath.barath_db.auto_catch_db import Character_Catcher_Bot_db as waifu_db
+from Barath.barath_db.auto_catch_db import Hunt_Your_Waifu_Bot_db as waifu_db
 
 import re
 
