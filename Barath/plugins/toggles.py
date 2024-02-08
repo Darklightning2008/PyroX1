@@ -29,7 +29,7 @@ async def toggle_command_enable(client, message):
 
     command_state = command.get('enabled', False)
     if command_state:
-        return message.reply_text(f"Command {command_name} is already enabled!")
+        return await message.reply_text(f"Command {command_name} is already enabled!")
     else:
         try:
             await toggle_db.update_one({'command_name': command_name}, {'$set': {'enabled': True}})
@@ -49,7 +49,7 @@ async def toggle_command_enable(client, message):
 
     command_state = command.get('enabled', False)
     if command_state:
-        return message.reply_text(f"Command {command_name} is already disabled!")
+        return await message.reply_text(f"Command {command_name} is already disabled!")
     else:
         try:
             await toggle_db.update_one({'command_name': command_name}, {'$set': {'enabled': False}})
