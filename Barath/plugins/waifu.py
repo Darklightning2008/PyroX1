@@ -48,11 +48,11 @@ async def get_helpdex(_, message):
                         await asyncio.sleep(0.5)
 
                         # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
-                        if sent_count % 100 == 0:
+                        if sent_count % 150 == 0:
                             await message.edit(f"{sent_count} Characters Scrapped\nInitialised Sleep time of 10 sec")
                             await asyncio.sleep(10)  # Add a delay of 10 seconds after sending the progress message
 
-                        if sent_count % 600 == 0:
+                        if sent_count % 700 == 0:
                             await message.edit(f"{sent_count} Characters Scrapped\nInitialised Sleep time of 60 sec")
                             await asyncio.sleep(60)  # Add a delay of 10 seconds after sending the progress message
 
