@@ -34,7 +34,6 @@ async def ban_group(_, message):
     if len(message.command) > 1:
         group_id = int(message.command[1])
         try:
-            group_name = await get_group_name(group_id)
             await add_to_banned_groups(group_id)
             await message.reply_text(f"Group {group_id} is set to auto catch")
         except Exception as e:
