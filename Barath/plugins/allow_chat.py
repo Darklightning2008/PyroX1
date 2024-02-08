@@ -8,8 +8,8 @@ async def get_group_name(group_id):
     group_details = await app.get_chat(group_id)
     return group_details.title
 
-async def add_to_banned_groups(group_id, group_name):
-    await allow_chats_collection.insert_one({"group_id": group_id, "group_name": group_name})
+async def add_to_banned_groups(group_id):
+    await allow_chats_collection.insert_one({"group_id": group_id})
 
 async def remove_from_banned(group_id):
     await allow_chats_collection.delete_one({"group_id": group_id})
@@ -21,7 +21,7 @@ async def is_group_banned(group_id):
 async def fetch_banned_groups():
     banned_groups = []
     async for group in allow_chats_collection.find():
-        banned_groups.append(f"Group ID: {group['group_id']}, Group Name: {group['group_name']}")
+        banned_groups.append(f"Group ID: {group['group_id']}")
     return banned_groups
 
 
@@ -35,8 +35,8 @@ async def ban_group(_, message):
         group_id = int(message.command[1])
         try:
             group_name = await get_group_name(group_id)
-            await add_to_banned_groups(group_id, group_name)
-            await message.reply_text(f"Group {group_name} is set to auto catch")
+            await add_to_banned_groups(group_id)
+            await message.reply_text(f"Group {group_id} is set to auto catch")
         except Exception as e:
             await message.reply_text(f"Error banning group: {e}")
     else:
