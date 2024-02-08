@@ -1,6 +1,6 @@
 from Barath import barath as app
 from pyrogram import filters
-from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db
 from pyrogram.types import Photo
 import asyncio
 
@@ -43,11 +43,8 @@ async def guess(_, message):
                 print(f"Document not found for id: {id}")
 
         if "/guess" in message.caption:
-      
             id = message.photo.file_unique_id
-
             document = await catch_your_waifu_db.find_one({"id": str(id)})
-
             if document:
                 first_name = document.get('name', '').lower()
                 if first_name == "nothing":
@@ -55,5 +52,30 @@ async def guess(_, message):
                 else:
                     await asyncio.sleep(3)  
                     sent_message = await message.reply_text(f"/guess {first_name}")
+            else:
+                print(f"Document not found for id: {id}")
+        if "/guess" in message.caption:
+            id = message.photo.file_unique_id
+            document = await catch_your_waifu_db.find_one({"id": str(id)})
+            if document:
+                first_name = document.get('name', '').lower()
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/guess {first_name}")
+            else:
+                print(f"Document not found for id: {id}")
+
+        if "/hunt" in message.caption:
+            id = message.photo.file_unique_id
+            document = await Hunt_Your_Waifu_Bot_db.find_one({"id": str(id)})
+            if document:
+                first_name = document.get('name', '').lower()
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/hunt {first_name}")
             else:
                 print(f"Document not found for id: {id}")
