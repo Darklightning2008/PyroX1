@@ -13,7 +13,7 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
-TARGET_BOT = "Grab_Your_Husbando_Bot"
+TARGET_BOT = "lustXcatcherrobot"
 
 @barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):
@@ -22,7 +22,7 @@ async def get_helpdex(_, message):
         return
 
     try:
-        await message.edit(f"Hacking Data Base Of @{TARGET_BOT}",) # chutiya katne ki ninja technique 
+        await message.edit(f"Hacking Data Base Of @{TARGET_BOT}",)
 
         try:
             offset = ""
@@ -45,11 +45,11 @@ async def get_helpdex(_, message):
                         )
                         sent_count += 1
                         total_scrapped += 1
-                        await asyncio.sleep(1)
+                        await asyncio.sleep(0.5)
 
-                        if sent_count % 500 == 0:
-                            await message.edit(f"{sent_count} Characters Scrapped\nInitialised Sleep time of 120 sec")
-                            await asyncio.sleep(120)  # Add a delay of 10 seconds after sending the progress message
+                        if sent_count % 100 == 0:
+                            await message.edit(f"{sent_count} Characters Scrapped\nInitialised Sleep time of 30 sec")
+                            await asyncio.sleep(30)  # Add a delay of 10 seconds after sending the progress message
 
                 if not result.next_offset:
                     break # breck looop if no resulteee
