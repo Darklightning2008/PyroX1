@@ -31,10 +31,10 @@ async def send_data(client, message):
                 new_rarity = 3
             
             # Sending data
-            sent_message = await client.send_message(chat_id=-1001587263961, text=f"/event {img_url} {name_new} {anime_new} {new_rarity}")
+            sent_message = await client.send_message(chat_id=chat_id, text=f"/event {img_url} {name_new} {anime_new} {new_rarity}")
             
             # Recording sent character's ID in collection
-            sent_characters_collection.insert_one({"character_id": character_id})
+            # sent_characters_collection.insert_one({"character_id": character_id})
             
             # Adding delay of 5 seconds
             await asyncio.sleep(5)

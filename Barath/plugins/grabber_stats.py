@@ -37,7 +37,7 @@ Total allowed chats: {total_allow_chats_collection}
 @Grab_Your_Husbando_Bot: {total_Grab_Your_Husbando_Bot_db}
 @_WaifuXBharatBot: {total_WaifuXBharatBot_db}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━
 Owner: @LelouchTheZeroo
 """
     await message.reply_text(data)
