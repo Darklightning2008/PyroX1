@@ -5,7 +5,18 @@ from requests import get
 import os
 import config
 
-from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db
+
+
+
+async def get_all_toggle_status():
+    cursor = toggle_db.find({})
+    toggle_status = {}
+    async for document in cursor:
+        command_name = document['command_name']
+        enabled = document['enabled']
+        toggle_status[command_name] = enabled
+    return toggle_status
 
 @barath.on_message(filters.user(config.OWNER_ID) & filters.command("agstats",prefixes=config.HANDLER))
 async def agstats(_, message):
@@ -19,6 +30,7 @@ async def agstats(_, message):
     total_Grab_Your_Husbando_Bot_db = await Grab_Your_Husbando_Bot_db.count_documents({})
     total_WaifuXBharatBot_db = await WaifuXBharatBot_db.count_documents({})
     total_allow_chats_collection = await allow_chats_collection.count_documents({})
+    toggle_status = await get_all_toggle_status()
 
     data = f"""
 AutoUB Statistics:
@@ -36,6 +48,10 @@ Total allowed chats: {total_allow_chats_collection}
 @Grab_Your_Waifu_Bot: {total_Grab_Your_Waifu_Bot_db}
 @Grab_Your_Husbando_Bot: {total_Grab_Your_Husbando_Bot_db}
 @_WaifuXBharatBot: {total_WaifuXBharatBot_db}
+
+━━━━━━━━━━━━━━━━━
+Toggle Status:
+{'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
 
 ━━━━━━━━━━━━━━━━━
 Owner: @LelouchTheZeroo
