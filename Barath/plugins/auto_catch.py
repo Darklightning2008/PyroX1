@@ -10,7 +10,7 @@ from Barath.barath_db.auto_catch_db import (
     lustXcatcherrobot_db
 )
 from Barath.plugins.allow_chat import is_group_allowed
-from Barath.plugins.toggles import check_command_status
+from Barath.plugins.toggles import get_command_status
 
 BOTS = [6438576771, 6883098627, 6195436879, 6816539294,
         6157455819, 6763528462, 5934263177, 6546492683,
@@ -29,11 +29,11 @@ async def process_command(message, command, db_collection):
 
 @app.on_message((filters.user(BOTS) & filters.photo))
 async def guess(_, message):
-    autoCatch_enabled = await check_command_status("autocatch")
+    autoCatch_enabled = await get_command_status("autocatch")
     if not autoCatch_enabled:
         return
 
-    allowall_enabled = await check_command_status("allowall")
+    allowall_enabled = await get_command_status("allowall")
     if allowall_enabled or await is_group_allowed(message.chat.id):
         if message.photo:
             if "/secure" in message.caption:
