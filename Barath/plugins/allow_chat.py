@@ -35,7 +35,7 @@ async def ban_group(_, message):
         group_id = int(message.command[1])
         group = await is_group_allowed(group_id)
         if  group:
-            return message.reply_text(f"Group is already into include  list")
+            return await message.reply_text(f"Group is already into include  list")
         try:
             await add_to_banned_groups(group_id)
             await message.reply_text(f"Group {group_id} is set to auto catch")
