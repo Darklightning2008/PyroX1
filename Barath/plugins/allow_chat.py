@@ -14,7 +14,7 @@ async def add_to_banned_groups(group_id):
 async def remove_from_banned(group_id):
     await allow_chats_collection.delete_one({"group_id": group_id})
 
-async def is_group_banned(group_id):
+async def is_group_allowed(group_id):
     group = await allow_chats_collection.find_one({"group_id": group_id})
     return bool(group)
 
@@ -33,7 +33,7 @@ async def ban_group(_, message):
 
     if len(message.command) > 1:
         group_id = int(message.command[1])
-        group = await is_group_banned(group_id)
+        group = await is_group_allowed(group_id)
         if  group:
             return message.reply_text(f"Group is already into include  list")
         try:
@@ -54,7 +54,7 @@ async def unban_group(_, message):
     try:
         if len(message.command) > 1:
             group_id = int(message.command[1])
-            group = await is_group_banned(group_id)
+            group = await is_group_allowed(group_id)
             if group:
                 await remove_from_banned(group_id)
                 await message.reply(f"Group {group_id} is removed from allow catch.")

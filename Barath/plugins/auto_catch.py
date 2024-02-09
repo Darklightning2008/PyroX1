@@ -1,114 +1,53 @@
+import config
+import asyncio
 from Barath import barath as app
 from pyrogram import filters
-from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,lustXcatcherrobot_db
-from Barath.plugins.allow_chat import is_group_banned
-from pyrogram.types import Photo
-import asyncio
+from Barath.barath_db.auto_catch_db import (
+    waifu_db, waifu_grabber_bot_db, catch_your_waifu_db,
+    Hunt_Your_Waifu_Bot_db, Character_Catcher_Bot_db,
+    Husbando_Grabber_Bot_db, Grab_Your_Waifu_Bot_db,
+    Grab_Your_Husbando_Bot_db, WaifuXBharatBot_db,
+    lustXcatcherrobot_db
+)
+from Barath.plugins.allow_chat import is_group_allowed
 from Barath.plugins.toggles import check_command_status
 
-BOTS = [6438576771,6883098627,6195436879,6816539294,6157455819,6763528462,5934263177,6546492683,6212414747,6501935889,6714477044]
+BOTS = [6438576771, 6883098627, 6195436879, 6816539294,
+        6157455819, 6763528462, 5934263177, 6546492683,
+        6212414747, 6501935889, 6714477044]
+
+async def process_command(message, command, db_collection):
+    id = message.photo.file_unique_id
+    document = await db_collection.find_one({"id": str(id)})
+    if document:
+        first_name = document.get('name', '').lower()
+        if first_name != "nothing":
+            await asyncio.sleep(3)  
+            sent_message = await message.reply_text(f"{command} {first_name}")
+    else:
+        print(f"Document not found for id: {id}")
+
 @app.on_message((filters.user(BOTS) & filters.photo))
 async def guess(_, message):
-    
     autoCatch_enabled = await check_command_status("autocatch")
     if not autoCatch_enabled:
         return
-    
-    chat_id = message.chat.id
-    if not await is_group_banned(chat_id):
-        return
-    if message.photo:
-   
-        if "/secure" in message.caption:
-      
-            id = message.photo.file_unique_id
 
-            document = await waifu_db.find_one({"id": str(id)})
-
-            if document:
-                first_name = document.get('name', '').lower()
-                if first_name == "nothing":
-                    return
-                else:
-                    await asyncio.sleep(3)  
-                    sent_message = await message.reply_text(f"/secure {first_name}")
-            else:
-                print(f"Document not found for id: {id}")
-
-        if "/grab" in message.caption:
-      
-            id = message.photo.file_unique_id
-
-            document = await waifu_grabber_bot_db.find_one({"id": str(id)})
-            if document is None:
-                document = await Husbando_Grabber_Bot_db.find_one({"id": str(id)})
-                if document is None:
-                    document =  await Grab_Your_Waifu_Bot_db.find_one({"id": str(id)})
-                    if document is None:
-                        document =  await Grab_Your_Husbando_Bot_db.find_one({"id": str(id)})
-                        if document is None:
-                            document =  await WaifuXBharatBot_db.find_one({"id": str(id)})
-
-            if document:
-                first_name = document.get('name', '').lower()
-                if first_name == "nothing":
-                    return
-                else:
-                    await asyncio.sleep(3)  
-                    sent_message = await message.reply_text(f"/grab {first_name}")
-            else:
-                print(f"Document not found for id: {id}")
-
-
-        if "/guess" in message.caption:
-            id = message.photo.file_unique_id
-            document = await catch_your_waifu_db.find_one({"id": str(id)})
-            if document:
-                first_name = document.get('name', '').lower()
-                if first_name == "nothing":
-                    return
-                else:
-                    await asyncio.sleep(3)  
-                    sent_message = await message.reply_text(f"/guess {first_name}")
-            else:
-                print(f"Document not found for id: {id}")
-
-        if "/hunt" in message.caption:
-            id = message.photo.file_unique_id
-            document = await Hunt_Your_Waifu_Bot_db.find_one({"id": str(id)})
-            if document:
-                first_name = document.get('name', '').lower()
-                if first_name == "nothing":
-                    return
-                else:
-                    await asyncio.sleep(3)  
-                    sent_message = await message.reply_text(f"/hunt {first_name}")
-            else:
-                print(f"Document not found for id: {id}")
-
-
-        if "/collect" in message.caption:
-            id = message.photo.file_unique_id
-            document = await Character_Catcher_Bot_db.find_one({"id": str(id)})
-            if document:
-                first_name = document.get('name', '').lower()
-                if first_name == "nothing":
-                    return
-                else:
-                    await asyncio.sleep(3)  
-                    sent_message = await message.reply_text(f"/collect {first_name}")
-            else:
-                print(f"Document not found for id: {id}")
-
-        if "/slave" in message.caption:
-            id = message.photo.file_unique_id
-            document = await lustXcatcherrobot_db.find_one({"id": str(id)})
-            if document:
-                first_name = document.get('name', '').lower()
-                if first_name == "nothing":
-                    return
-                else:
-                    await asyncio.sleep(3)  
-                    sent_message = await message.reply_text(f"/slave {first_name}")
-            else:
-                print(f"Document not found for id: {id}")
+    allowall_enabled = await check_command_status("allowall")
+    if allowall_enabled or await is_group_allowed(message.chat.id):
+        if message.photo:
+            if "/secure" in message.caption:
+                await process_command(message, "/secure", waifu_db)
+            elif "/grab" in message.caption:
+                for db_collection in [waifu_grabber_bot_db, Husbando_Grabber_Bot_db,
+                                      Grab_Your_Waifu_Bot_db, Grab_Your_Husbando_Bot_db,
+                                      WaifuXBharatBot_db]:
+                    await process_command(message, "/grab", db_collection)
+            elif "/guess" in message.caption:
+                await process_command(message, "/guess", catch_your_waifu_db)
+            elif "/hunt" in message.caption:
+                await process_command(message, "/hunt", Hunt_Your_Waifu_Bot_db)
+            elif "/collect" in message.caption:
+                await process_command(message, "/collect", Character_Catcher_Bot_db)
+            elif "/slave" in message.caption:
+                await process_command(message, "/slave", lustXcatcherrobot_db)
