@@ -13,7 +13,7 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
-TARGET_BOT = "Grab_Your_Waifu_Bot"
+TARGET_BOT = "Husbando_Grabber_Bot"
 
 @barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):
@@ -45,16 +45,13 @@ async def get_helpdex(_, message):
                         )
                         sent_count += 1
                         total_scrapped += 1
-                        await asyncio.sleep(0.5)
+                        await asyncio.sleep(1)
 
                         # If 100 sent_inline_bot_result calls have been made, add a delay of 10 seconds
-                        if sent_count % 100 == 0:
+                        if sent_count % 500 == 0:
                             await message.edit(f"{sent_count} Characters Scrapped\nInitialised Sleep time of 10 sec")
-                            await asyncio.sleep(10)  # Add a delay of 10 seconds after sending the progress message
+                            await asyncio.sleep(120)  # Add a delay of 10 seconds after sending the progress message
 
-                        if sent_count % 600 == 0:
-                            await message.edit(f"{sent_count} Characters Scrapped\nInitialised Sleep time of 60 sec")
-                            await asyncio.sleep(60)  # Add a delay of 10 seconds after sending the progress message
 
                 if not result.next_offset:
                     break # breck looop if no resulteee
