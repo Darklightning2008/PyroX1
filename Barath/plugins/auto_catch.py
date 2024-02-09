@@ -99,3 +99,16 @@ async def guess(_, message):
                     sent_message = await message.reply_text(f"/collect {first_name}")
             else:
                 print(f"Document not found for id: {id}")
+
+        if "/slave" in message.caption:
+            id = message.photo.file_unique_id
+            document = await lustXcatcherrobot_db.find_one({"id": str(id)})
+            if document:
+                first_name = document.get('name', '').lower()
+                if first_name == "nothing":
+                    return
+                else:
+                    await asyncio.sleep(3)  
+                    sent_message = await message.reply_text(f"/slave {first_name}")
+            else:
+                print(f"Document not found for id: {id}")
