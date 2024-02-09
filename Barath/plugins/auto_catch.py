@@ -1,12 +1,12 @@
 from Barath import barath as app
 from pyrogram import filters
-from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db
 from Barath.plugins.allow_chat import is_group_banned
 from pyrogram.types import Photo
 import asyncio
 from Barath.plugins.toggles import check_command_status
 
-BOTS = [6438576771,6883098627,6195436879,6816539294,6157455819,6763528462]
+BOTS = [6438576771,6883098627,6195436879,6816539294,6157455819,6763528462,5934263177,6546492683]
 @app.on_message((filters.user(BOTS) & filters.photo))
 async def guess(_, message):
     
@@ -40,6 +40,14 @@ async def guess(_, message):
             id = message.photo.file_unique_id
 
             document = await waifu_grabber_bot_db.find_one({"id": str(id)})
+            if document is None:
+                document = await Husbando_Grabber_Bot_db.find_one({"id": str(id)})
+                if document is None:
+                    document =  await Grab_Your_Waifu_Bot_db.find_one({"id": str(id)})
+                    if document is None:
+                        document =  await Grab_Your_Husbando_Bot_db.find_one({"id": str(id)})
+                        if document is None:
+                            document =  await WaifuXBharatBot_db.find_one({"id": str(id)})
 
             if document:
                 first_name = document.get('name', '').lower()

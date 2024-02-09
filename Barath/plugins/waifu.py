@@ -13,7 +13,7 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
-TARGET_BOT = "Grab_Your_Waifu_Bot"
+TARGET_BOT = "Grab_Your_Husbando_Bot"
 
 @barath.on_message(filters.command("up", prefixes=".") & filters.user(OWNER_ID))
 async def get_helpdex(_, message):
@@ -62,5 +62,7 @@ async def get_helpdex(_, message):
 
         except Exception as e:
             print(f"Error: {e}")
+            await message.edit(f"Error Occured:\n{e}")
     except Exception as e:
         print(f"Error: {e}")
+        await message.edit(f"Error Occured:\n{e}")
