@@ -98,3 +98,17 @@ Owner: @LelouchTheZeroo
         await message.delete()
     except:
         return
+    
+
+# Command handler to list all counters and their values
+@barath.on_message(filters.command("allbots", prefixes=HANDLER) & filters.user(OWNER_ID))
+async def list_counters_command(client, message):
+    # Get the list of counters and their values
+    counter_data = await list_counters()
+
+    # Format the counter data for display
+    if counter_data:
+        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        await message.reply_text(counter_text)
+    else:
+        await message.reply_text("No counters found.")
