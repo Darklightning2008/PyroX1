@@ -84,7 +84,7 @@ async def agstats(_, message):
     await asyncio.sleep(1)
     await msg.edit("Please Wait!")
     await asyncio.sleep(1)
-    await msg.edit(data)
+    await msg.edit(data,disable_web_page_preview=True)
     try:
         await message.delete()
     except:
