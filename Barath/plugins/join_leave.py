@@ -3,6 +3,7 @@ from pyrogram.errors import UserAlreadyParticipant, FloodWait
 
 from Barath import bot, barath
 from config import OWNER_ID,HANDLER
+import asyncio
 
 ASS_USERNAME="LelouchTheZeroo"
 
@@ -19,16 +20,18 @@ async def joinchat(client, message):
         user = await client.get_me()
     except:
         user.first_name = f"{ASS_USERNAME}"
-    await msg.delete()
+    # await msg.delete()
+    msg = message.reply_text(f"Trying to Join Group {username}")
+    await asyncio.sleep(1)
 
     try: 
         await barath.join_chat(f"@{username}")
-        msg = await message.reply_text(f"✅ Successfully joined @{username} group!")
+        msg.edit(f"✅ Successfully joined @{username} group!")
     except UserAlreadyParticipant:
-        await message.reply_text(f"🔴 {user.first_name} is already in this group!")
+        await msg.edit(f"🔴 {user.first_name} is already in this group!")
     except Exception as e:
         print(f"Error joining group: {e}")
-        await message.reply_text(f"❌ An error occurred while trying to join the group. Please try again later.")
+        await msg.edit(f"❌ An error occurred while trying to join the group. Please try again later.")
 
 
 
@@ -37,16 +40,17 @@ async def rem(client, message):
     try:
         if len(message.command) > 1:
             group_id = int(message.command[1])
-            await barath.send_message(
+            msg = await barath.send_message(
                 group_id,
-                "✅ ᴜsᴇʀʙᴏᴛ ʟᴇғᴛ ᴛʜᴇ ᴄʜᴀᴛ....",
+                "Leaving Chat in 2 sec.",
             )
+            await asyncio.sleep(2)
+            msg.edit("Chat Left chat")
             await barath.leave_chat(group_id)
         else:
-            await barath.send_message(
-                message.chat.id,
-                "✅ ᴜsᴇʀʙᴏᴛ ʟᴇғᴛ ᴛʜᴇ ᴄʜᴀᴛ....",
-            )
+            msg = await  barath.reply_text("Leaving current chat in 2 Sec..")
+            await asyncio.sleep(2)
+            msg.edit("Chat Left")
             await barath.leave_chat(message.chat.id)
     except Exception as e:
         print(f"Error leaving group: {e}")
