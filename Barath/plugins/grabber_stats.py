@@ -26,7 +26,7 @@ async def get_counters_data():
 
     # Format the counter data for display
     if counter_data:
-        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        counter_text = "\n".join([f"➣/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
         return counter_text
     else:
         return "No Data Found!"
@@ -72,9 +72,8 @@ Commands Status:
 {'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
 
 ━━━━━━━━━━━━━━━━━
-Total AutoCaught:
-    ➤ {total_caught}
-       ➣{all_counters}
+Total AutoCaught:{total_caught}
+    ➤ {all_counters}
 ━━━━━━━━━━━━━━━━━
 Owner: @LelouchTheZeroo
 """
