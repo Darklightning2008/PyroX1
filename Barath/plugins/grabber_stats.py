@@ -60,11 +60,11 @@ Toggle Status:
 Owner: @LelouchTheZeroo
 """
     msg = await  message.reply_text("Getting Stats...")
-    try:
-        await message.delete()
-    except:
-        return
     await asyncio.sleep(1)
     await msg.edit("Please Wait!")
     await asyncio.sleep(1)
     await msg.edit(data)
+    try:
+        await message.delete()
+    except:
+        return
