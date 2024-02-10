@@ -20,17 +20,6 @@ async def get_all_toggle_status():
         toggle_status[command_name] = enabled
     return toggle_status
 
-async def list_counters():
-    # Get the list of counters and their values
-    counter_data = await list_counters()
-
-    # Format the counter data for display
-    if counter_data:
-        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
-        return counter_text
-    else:
-        return "No Data Found!"
-
 async def get_counters_data():
     # Get the list of counters and their values
     counter_data = await list_counters()
@@ -98,6 +87,7 @@ Owner: @LelouchTheZeroo
         await message.delete()
     except:
         return
+
     
 
 # Command handler to list all counters and their values
