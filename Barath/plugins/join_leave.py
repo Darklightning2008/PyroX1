@@ -16,7 +16,7 @@ async def joinchat(client, message):
         return
 
     try:
-        user = await barath.get_me()
+        user = await client.get_me()
     except:
         user.first_name = f"{ASS_USERNAME}"
     try: 
@@ -39,11 +39,11 @@ async def joinchat(client, message):
 @barath.on_message(filters.command("leave", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def rem(USER, message):
     try:
-        await USER.send_message(
+        await barath.send_message(
             message.chat.id,
             "✅ ᴜsᴇʀʙᴏᴛ ʟᴇғᴛ ᴛʜᴇ ᴄʜᴀᴛ....",
         )
-        await USER.leave_chat(message.chat.id)
+        await barath.leave_chat(message.chat.id)
     except:
         await message.reply_text(
             "❌ **Assistant can't leave your group! probably waiting for floodwaits**\n\n» Manually remove me from your group</b>"

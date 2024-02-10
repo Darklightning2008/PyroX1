@@ -101,6 +101,6 @@ async def list_counters_command(client, message):
     # Format the counter data for display
     if counter_data:
         counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
-        await message.reply_text(counter_text)
+        msg = await message.reply_text(counter_text)
     else:
         await message.reply_text("No counters found.")
