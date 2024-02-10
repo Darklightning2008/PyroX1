@@ -31,6 +31,17 @@ async def list_counters():
     else:
         return "No Data Found!"
 
+async def get_counters_data():
+    # Get the list of counters and their values
+    counter_data = await list_counters()
+
+    # Format the counter data for display
+    if counter_data:
+        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        return counter_text
+    else:
+        return "No Data Found!"
+
 @barath.on_message(filters.command("agstats", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def agstats(_, message):
     total_waifu_db = await waifu_db.count_documents({})
@@ -47,7 +58,7 @@ async def agstats(_, message):
     total_allow_chats_collection = await allow_chats_collection.count_documents({})
     toggle_status = await get_all_toggle_status()
     total_caught = await get_counter("total_caught")
-    all_counters = await list_counters()
+    all_counters = await get_counters_data()
 
     data = f"""
 AutoUB Statistics:
@@ -87,20 +98,3 @@ Owner: @LelouchTheZeroo
         await message.delete()
     except:
         return
-    
-
-
-# Command handler to list all counters and their values
-@barath.on_message(filters.command("all_caught"))
-async def list_counters_command(client, message):
-    # Get the list of counters and their values
-    counter_data = await list_counters()
-
-    # Format the counter data for display
-    if counter_data:
-        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
-        await message.reply_text(counter_text)
-    else:
-        await message.reply_text("No counters found.")
-
-
