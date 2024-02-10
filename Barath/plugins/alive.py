@@ -1,6 +1,7 @@
 import time 
 import random 
 import asyncio
+import config
 from config import HANDLER, OWNER_ID, BARATH
 from pyrogram import filters, __version__ as pyrover, enums
 from Barath import barath, get_readable_time, StartTime
@@ -40,10 +41,11 @@ async def alive():
     return ALIVE_TEXT, photo_url
     
 
-@barath.on_message(filters.command("ping", prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("ping", prefixes=HANDLER) & filters.user(config.OWNER_ID))
 async def ping(_, message):
     start_time = time.time()
-    await message.edit("✮ᑭｴƝG...✮")
+    await barath.reply_text("ᑭｴƝG...")
+    await message.edit("✮ᑭｴƝGing...✮")
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
     uptime = get_readable_time((time.time() - StartTime))
