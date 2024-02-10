@@ -47,7 +47,7 @@ async def agstats(_, message):
     total_allow_chats_collection = await allow_chats_collection.count_documents({})
     toggle_status = await get_all_toggle_status()
     total_caught = await get_counter("total_caught")
-    all_counters = list_counters()
+    all_counters = await list_counters()
 
     data = f"""
 AutoUB Statistics:
