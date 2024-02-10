@@ -50,6 +50,10 @@ async def ping(_, message):
     ping_time = round((end_time - start_time) * 1000, 3)
     uptime = get_readable_time((time.time() - StartTime))
     await msg.edit(f"\ (•◡•) / **ɪ ᴀᴍ ᴀʟɪᴠᴇ ʙᴀʙʏ**\n⋙ 🔔 **ᑭｴƝG**: {ping_time}\n⋙ ⬆️ **ⴑⲢⲦⲒⲘⲈ**: {uptime}")
+    try:
+        await message.delete()
+    except:
+        return
 
 __mod_name__ = "STATUS"  
     
