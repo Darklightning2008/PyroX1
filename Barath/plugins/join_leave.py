@@ -21,12 +21,12 @@ async def joinchat(client, message):
     except:
         user.first_name = f"{ASS_USERNAME}"
     # await msg.delete()
-    msg = message.reply_text(f"Trying to Join Group {username}")
+    msg = await message.reply_text(f"Trying to Join Group {username}")
     await asyncio.sleep(1)
 
     try: 
         await barath.join_chat(f"@{username}")
-        msg.edit(f"✅ Successfully joined @{username} group!")
+        await msg.edit(f"✅ Successfully joined @{username} group!")
     except UserAlreadyParticipant:
         await msg.edit(f"🔴 {user.first_name} is already in this group!")
     except Exception as e:
@@ -45,12 +45,12 @@ async def rem(client, message):
                 "Leaving Chat in 2 sec.",
             )
             await asyncio.sleep(2)
-            msg.edit("Chat Left chat")
+            await msg.edit("Chat Left Successfully")
             await barath.leave_chat(group_id)
         else:
             msg = await  barath.reply_text("Leaving current chat in 2 Sec..")
             await asyncio.sleep(2)
-            msg.edit("Chat Left")
+            await msg.edit("Chat Left")
             await barath.leave_chat(message.chat.id)
     except Exception as e:
         print(f"Error leaving group: {e}")
