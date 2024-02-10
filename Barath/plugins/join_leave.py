@@ -40,18 +40,22 @@ async def rem(client, message):
     try:
         if len(message.command) > 1:
             group_id = int(message.command[1])
-            msg = await barath.send_message(
+            await barath.send_message(
                 group_id,
-                "Leaving Chat in 2 sec.",
+                "Leaving Chat",
             )
+            msg = message.reply_text("Leaving chat in 2 sec...")
+            await message.delete()
             await asyncio.sleep(2)
             await msg.edit("Chat Left Successfully")
             await barath.leave_chat(group_id)
         else:
-            msg = await  barath.reply_text("Leaving current chat in 2 Sec..")
+            msg = await  message.reply_text("Leaving current chat in 2 Sec..")
+            await message.delete()
             await asyncio.sleep(2)
             await msg.edit("Chat Left")
             await barath.leave_chat(message.chat.id)
+
     except Exception as e:
         print(f"Error leaving group: {e}")
         await message.reply_text(
