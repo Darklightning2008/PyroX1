@@ -2,8 +2,9 @@ from datetime import datetime
 from pyrogram import filters, Client
 from pyrogram.types import Message
 from Barath import barath
+from config import HANDLER, OWNER_ID
 
-@barath.on_message(filters.me & filters.command(["stats"], prefixes="."))
+@barath.on_message(filters.command("stats", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def stats(client: Client, message: Message):
     await message.edit_text("Collecting stats")
     start = datetime.now()
@@ -14,8 +15,7 @@ async def stats(client: Client, message: Message):
     b = 0
     a_chat = 0
     Meh = await client.get_me()
-    dialogs = await client.get_dialogs()
-    for dialog in dialogs:
+    async for dialog in client.iter_dialogs():
         if dialog.chat.type == "private":
             u += 1
         elif dialog.chat.type == "bot":
