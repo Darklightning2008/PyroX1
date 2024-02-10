@@ -2,7 +2,7 @@ from Barath import bot as app
 from Barath import barath
 from config import OWNER_ID, HANDLER
 from Barath.barath_db.auto_catch_db import allow_chats_collection
-from pyrogram import filters
+from pyrogram import filters,enums
 
 async def get_group_name(group_id):
     group_details = await app.get_chat(group_id)
@@ -21,7 +21,7 @@ async def is_group_allowed(group_id):
 async def fetch_allowed_groups():
     allowed_groups = []
     async for group in allow_chats_collection.find():
-        allowed_groups.append(f"Group ID: {group['group_id']}, Group Name: {group['group_name']}")
+        allowed_groups.append(f"☉ <b>ID:</b> <code>{group['group_id']}</code>\n☉ <b>Name:</b> {group['group_name']}\n")
     return allowed_groups
 
 @barath.on_message(filters.command(["include"], prefixes=HANDLER) & filters.user(OWNER_ID))
@@ -38,7 +38,7 @@ async def ban_group(_, message):
             return await message.reply_text(f"Group is already in the allowed list")
         try:
             await add_to_allowed_groups(group_id, group_name)
-            await message.reply_text(f"Group {group_id} ({group_name}) is added to the allowed list for auto catch")
+            await message.reply_text(f"Group ({group_name}) is added to the allowed list for auto catch")
         except Exception as e:
             await message.reply_text(f"Error adding group: {e}")
     else:
@@ -49,7 +49,7 @@ async def ban_group(_, message):
             return await message.reply_text(f"Group is already in the allowed list")
         try:
             await add_to_allowed_groups(group_id, group_name)
-            await message.reply_text(f"Group {group_id} ({group_name}) is added to the allowed list for auto catch")
+            await message.reply_text(f"Group ({group_name}) is added to the allowed list for auto catch")
         except Exception as e:
             await message.reply_text(f"Error adding group: {e}")
     await message.delete()
@@ -69,10 +69,19 @@ async def unban_group(_, message):
             else:
                 await message.reply("Group is not in the allowed list")
         else:
-            await message.reply("Please provide the group ID.")
+            # If no group ID is provided, remove the ID of the current chat
+            chat_id = message.chat.id
+            chat_name = message.chat.title
+            group = await is_group_allowed(chat_id)
+            if group:
+                await remove_from_allowed(chat_id)
+                await message.reply(f"Current chat ({chat_name}) is removed from allow catch")
+            else:
+                await message.reply("No group ID provided and current chat is not in the allow catch")
     except Exception as e:
         await message.reply_text(f"Error removing group: {e}")
     await message.delete()
+
 
 @barath.on_message(filters.command("allow_chats", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def get_allowed_groups(_, message):
@@ -87,5 +96,5 @@ async def get_allowed_groups(_, message):
         else:
             await message.reply("No groups are currently allowed.")
     except Exception as e:
-        await message.reply_text(f"Error getting allowed groups: {e}")
+        await message.reply_text(f"Error getting allowed groups: {e}",parse_mode=enums.ParseMode.HTML)
     await message.delete()
