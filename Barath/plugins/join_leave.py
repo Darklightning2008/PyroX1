@@ -19,25 +19,20 @@ async def joinchat(client, message):
         user = await client.get_me()
     except:
         user.first_name = f"{ASS_USERNAME}"
+
     try: 
         await barath.join_chat(f"@{username}")
-        
+        await message.reply_text(f"✅ Successfully joined @{username}'s group!")
     except UserAlreadyParticipant:
-        await message.reply_text(
-            f"🔴 **{user.first_name} already join this group !!**",
-        )
+        await message.reply_text(f"🔴 {user.first_name} is already in this group!")
     except Exception as e:
-        print(e)
-        await message.reply_text(
-            f"❌ **Assistant ({user.first_name}) can't join your group due to many join requests for userbot!**\n‼️ Make sure the user is not banned in the group."
-            f"\n\n» `Manually add the {user.first_name} to your group`",
-        )
-        return
+        print(f"Error joining group: {e}")
+        await message.reply_text(f"❌ An error occurred while trying to join the group. Please try again later.")
 
 
 
 @barath.on_message(filters.command("leave", prefixes=HANDLER) & filters.user(OWNER_ID))
-async def rem(USER, message):
+async def rem(client, message):
     try:
         await barath.send_message(
             message.chat.id,
