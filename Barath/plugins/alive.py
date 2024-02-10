@@ -41,10 +41,10 @@ async def alive():
     return ALIVE_TEXT, photo_url
     
 
-@barath.on_message(filters.command("ping", prefixes=HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command("ping", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def ping(_, message):
     start_time = time.time()
-    await barath.reply_text("ᑭｴƝG...")
+    await barath.send_message(message.chat.id, "ᑭｴƝG...")
     await message.edit("✮ᑭｴƝGing...✮")
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
