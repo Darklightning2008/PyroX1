@@ -1,4 +1,4 @@
-from pyrogram import filters 
+from pyrogram import filters,enums
 from Barath import barath
 from requests import get
 
@@ -49,33 +49,36 @@ async def agstats(_, message):
     total_caught = await get_counter("total_caught")
     all_counters = await get_counters_data()
 
+# <a href='tg://user?id={user_id}'>{name}</a>
+
+
     data = f"""
-AutoUB Statistics:
+</b>AutoUB Statistics:</b>
 ▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱
 
-Total Bots Scrapped: 11
-Total allowed chats: {total_allow_chats_collection}
+<b>Total Bots Scrapped:<b/> 11
+<b>Total allowed chats:<b/> {total_allow_chats_collection}
 
-@CharacterSecureBot: {total_waifu_db}
-@Catch_Your_Waifu_Bot: {total_catch_your_waifu_db}
-@Waifu_Grabber_Bot: {total_waifu_grabber_bot_db}
-@Hunt_Your_Waifu_Bot: {total_Hunt_Your_Waifu_Bot_db}
-@Character_Catcher_Bot: {total_Character_Catcher_Bot_db}
-@Husbando_Grabber_Bot: {total_Husbando_Grabber_Bot_db}
-@Grab_Your_Waifu_Bot: {total_Grab_Your_Waifu_Bot_db}
-@Grab_Your_Husbando_Bot: {total_Grab_Your_Husbando_Bot_db}
-@WaifuXBharatBot: {total_WaifuXBharatBot_db}
-@lustXcatcherrobot: {total_lustXcatcherrobot_db}
-@Dark_waifu_Bot: {total_Dark_waifu_Bot_db}
+<a href='t.me/CharacterSecureBot'>Character Secure</a>: {total_waifu_db}
+<a href='t.me/Catch_Your_Waifu_Bot'>Catch Your Waifu</a>: {total_catch_your_waifu_db}
+<a href='t.me/Waifu_Grabber_Bot'>Waifu Grabber</a>: {total_waifu_grabber_bot_db}
+<a href='t.me/Hunt_Your_Waifu_Bot'>Hunt Your Waifu</a>: {total_Hunt_Your_Waifu_Bot_db}
+<a href='t.me/Character_Catcher_Bot'>Character Catcher</a>: {total_Character_Catcher_Bot_db}
+<a href='t.me/Husbando_Grabber_Bot'>Husbando Grabber</a>: {total_Husbando_Grabber_Bot_db}
+<a href='t.me/Grab_Your_Waifu_Bot'>Grab Your Waifu</a>: {total_Grab_Your_Waifu_Bot_db}
+<a href='t.me/Grab_Your_Husbando_Bot'>Grab Your Husbando</a>: {total_Grab_Your_Husbando_Bot_db}
+<a href='t.me/WaifuXBharatBot'>Waifu Bharat</a>: {total_WaifuXBharatBot_db}
+<a href='t.me/lustXcatcherrobot'>Lust Catcher</a>: {total_lustXcatcherrobot_db}
+<a href='t.me/Dark_waifu_Bot'>Dark Waifu</a>: {total_Dark_waifu_Bot_db}
 ━━━━━━━━━━━━━━━━━
-Commands Status:
+<b>Commands Status:<b/>
 {'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
 
 ━━━━━━━━━━━━━━━━━
-Total AutoCaught:{total_caught}
+<b>Total AutoCaught:</b>{total_caught}
     ➤ {all_counters}
 ━━━━━━━━━━━━━━━━━
-Owner: @LelouchTheZeroo
+<b>Owner: <a href='t.me/LelouchTheZeroo'>Zero</a></b>
 """
     msg = await  message.reply_text("Getting Stats...")
     await asyncio.sleep(1)
