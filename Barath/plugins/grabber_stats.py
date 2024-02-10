@@ -9,7 +9,7 @@ import asyncio
 
 from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db,lustXcatcherrobot_db,Dark_waifu_Bot_db
 
-
+from Barath.barath_db.counter_db  import list_counters,get_counter
 
 async def get_all_toggle_status():
     cursor = toggle_db.find({})
@@ -19,6 +19,17 @@ async def get_all_toggle_status():
         enabled = document['enabled']
         toggle_status[command_name] = enabled
     return toggle_status
+
+async def list_counters():
+    # Get the list of counters and their values
+    counter_data = await list_counters()
+
+    # Format the counter data for display
+    if counter_data:
+        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        return counter_text
+    else:
+        return "No Data Found!"
 
 @barath.on_message(filters.command("agstats", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def agstats(_, message):
@@ -35,6 +46,8 @@ async def agstats(_, message):
     total_Dark_waifu_Bot_db = await Dark_waifu_Bot_db.count_documents({})
     total_allow_chats_collection = await allow_chats_collection.count_documents({})
     toggle_status = await get_all_toggle_status()
+    total_caught = await get_counter("total_caught")
+    all_counters = list_counters()
 
     data = f"""
 AutoUB Statistics:
@@ -55,9 +68,13 @@ Total allowed chats: {total_allow_chats_collection}
 @lustXcatcherrobot: {total_lustXcatcherrobot_db}
 @Dark_waifu_Bot: {total_Dark_waifu_Bot_db}
 ━━━━━━━━━━━━━━━━━
-Toggle Status:
+Commands Status:
 {'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
 
+━━━━━━━━━━━━━━━━━
+Total AutoCaught:
+    ➤ {total_caught}
+       ➣{all_counters}
 ━━━━━━━━━━━━━━━━━
 Owner: @LelouchTheZeroo
 """
@@ -70,3 +87,20 @@ Owner: @LelouchTheZeroo
         await message.delete()
     except:
         return
+    
+
+
+# Command handler to list all counters and their values
+@barath.on_message(filters.command("all_caught"))
+async def list_counters_command(client, message):
+    # Get the list of counters and their values
+    counter_data = await list_counters()
+
+    # Format the counter data for display
+    if counter_data:
+        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        await message.reply_text(counter_text)
+    else:
+        await message.reply_text("No counters found.")
+
+
