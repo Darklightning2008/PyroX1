@@ -26,7 +26,7 @@ async def get_counters_data():
 
     # Format the counter data for display
     if counter_data:
-        counter_text = "\n".join([f"➣/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        counter_text = "\n".join([f" ➣/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
         return counter_text
     else:
         return "No Data Found!"
@@ -53,11 +53,11 @@ async def agstats(_, message):
 
 
     data = f"""
-</b>AutoUB Statistics:</b>
+<b>AutoUB Statistics:</b>
 ▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱
 
-<b>Total Bots Scrapped:<b/> 11
-<b>Total allowed chats:<b/> {total_allow_chats_collection}
+<b>Total Bots Scrapped:</b> 11
+<b>Total allowed chats:</b> {total_allow_chats_collection}
 
 <a href='t.me/CharacterSecureBot'>Character Secure</a>: {total_waifu_db}
 <a href='t.me/Catch_Your_Waifu_Bot'>Catch Your Waifu</a>: {total_catch_your_waifu_db}
@@ -71,12 +71,12 @@ async def agstats(_, message):
 <a href='t.me/lustXcatcherrobot'>Lust Catcher</a>: {total_lustXcatcherrobot_db}
 <a href='t.me/Dark_waifu_Bot'>Dark Waifu</a>: {total_Dark_waifu_Bot_db}
 ━━━━━━━━━━━━━━━━━
-<b>Commands Status:<b/>
+<b>Commands Status:</b>
 {'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
 
 ━━━━━━━━━━━━━━━━━
-<b>Total AutoCaught:</b>{total_caught}
-    ➤ {all_counters}
+<b>Total AutoCaught:</b>
+{all_counters}
 ━━━━━━━━━━━━━━━━━
 <b>Owner: <a href='t.me/LelouchTheZeroo'>Zero</a></b>
 """
