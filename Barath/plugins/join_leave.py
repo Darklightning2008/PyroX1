@@ -12,17 +12,18 @@ async def joinchat(client, message):
         Test = message.text.split(" ")
         username = Test[1].replace("@", "")
     else:
-        await message.reply_text("Format: /join @username")
+        msg =  await message.reply_text("Format: /join @username")
         return
 
     try:
         user = await client.get_me()
     except:
         user.first_name = f"{ASS_USERNAME}"
+    await msg.delete()
 
     try: 
         await barath.join_chat(f"@{username}")
-        await message.reply_text(f"✅ Successfully joined @{username}'s group!")
+        msg = await message.reply_text(f"✅ Successfully joined @{username} group!")
     except UserAlreadyParticipant:
         await message.reply_text(f"🔴 {user.first_name} is already in this group!")
     except Exception as e:
