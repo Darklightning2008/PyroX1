@@ -2,10 +2,12 @@ from pyrogram import filters
 from Barath import barath
 from requests import get
 
+
 import os
 import config
+import asyncio
 
-from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db,lustXcatcherrobot_db
 
 
 
@@ -29,6 +31,7 @@ async def agstats(_, message):
     total_Grab_Your_Waifu_Bot_db = await Grab_Your_Waifu_Bot_db.count_documents({})
     total_Grab_Your_Husbando_Bot_db = await Grab_Your_Husbando_Bot_db.count_documents({})
     total_WaifuXBharatBot_db = await WaifuXBharatBot_db.count_documents({})
+    total_lustXcatcherrobot_db = await lustXcatcherrobot_db.count_documents({})
     total_allow_chats_collection = await allow_chats_collection.count_documents({})
     toggle_status = await get_all_toggle_status()
 
@@ -47,8 +50,8 @@ Total allowed chats: {total_allow_chats_collection}
 @Husbando_Grabber_Bot: {total_Husbando_Grabber_Bot_db}
 @Grab_Your_Waifu_Bot: {total_Grab_Your_Waifu_Bot_db}
 @Grab_Your_Husbando_Bot: {total_Grab_Your_Husbando_Bot_db}
-@_WaifuXBharatBot: {total_WaifuXBharatBot_db}
-
+@WaifuXBharatBot: {total_WaifuXBharatBot_db}
+@lustXcatcherrobot: {total_lustXcatcherrobot_db}
 ━━━━━━━━━━━━━━━━━
 Toggle Status:
 {'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
@@ -56,5 +59,12 @@ Toggle Status:
 ━━━━━━━━━━━━━━━━━
 Owner: @LelouchTheZeroo
 """
-    await message.reply_text(data)
-    await message.delete()
+    msg = await  message.reply_text("Getting Stats...")
+    try:
+        await message.delete()
+    except:
+        return
+    await asyncio.sleep(1)
+    await msg.edit("Please Wait!")
+    await asyncio.sleep(1)
+    await msg.edit(data)
