@@ -63,4 +63,4 @@ async def guess(_, message):
                 await process_command(message, "/slave", lustXcatcherrobot_db)
                 await increment_counter("slave")
 
-        await increment_counter("total_caught")
+            await increment_counter("total_caught")
