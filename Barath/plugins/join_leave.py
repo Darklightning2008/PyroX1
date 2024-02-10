@@ -35,16 +35,25 @@ async def joinchat(client, message):
 @barath.on_message(filters.command("leave", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def rem(client, message):
     try:
-        await barath.send_message(
-            message.chat.id,
-            "✅ ᴜsᴇʀʙᴏᴛ ʟᴇғᴛ ᴛʜᴇ ᴄʜᴀᴛ....",
-        )
-        await barath.leave_chat(message.chat.id)
-    except:
+        if len(message.command) > 1:
+            group_id = int(message.command[1])
+            await barath.send_message(
+                group_id,
+                "✅ ᴜsᴇʀʙᴏᴛ ʟᴇғᴛ ᴛʜᴇ ᴄʜᴀᴛ....",
+            )
+            await barath.leave_chat(group_id)
+        else:
+            await barath.send_message(
+                message.chat.id,
+                "✅ ᴜsᴇʀʙᴏᴛ ʟᴇғᴛ ᴛʜᴇ ᴄʜᴀᴛ....",
+            )
+            await barath.leave_chat(message.chat.id)
+    except Exception as e:
+        print(f"Error leaving group: {e}")
         await message.reply_text(
-            "❌ **Assistant can't leave your group! probably waiting for floodwaits**\n\n» Manually remove me from your group</b>"
+            "❌ **An error occurred while trying to leave the group. Please try again later.**\n\n» Manually remove me from your group."
         )
-        return
+
 
 
 # @bot.on_message(command(["userbotleaveall", "leaveall"]))
