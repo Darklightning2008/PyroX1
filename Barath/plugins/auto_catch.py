@@ -7,14 +7,14 @@ from Barath.barath_db.auto_catch_db import (
     Hunt_Your_Waifu_Bot_db, Character_Catcher_Bot_db,
     Husbando_Grabber_Bot_db, Grab_Your_Waifu_Bot_db,
     Grab_Your_Husbando_Bot_db, WaifuXBharatBot_db,
-    lustXcatcherrobot_db
+    lustXcatcherrobot_db,Dark_waifu_Bot_db
 )
 from Barath.plugins.allow_chat import is_group_allowed
 from Barath.plugins.toggles import get_command_status
 
 BOTS = [6438576771, 6883098627, 6195436879, 6816539294,
         6157455819, 6763528462, 5934263177, 6546492683,
-        6212414747, 6501935889, 6714477044]
+        6212414747, 6501935889, 6714477044,6786511875]
 
 async def process_command(message, command, db_collection):
     id = message.photo.file_unique_id
@@ -38,13 +38,17 @@ async def guess(_, message):
         if message.photo:
             if "/secure" in message.caption:
                 await process_command(message, "/secure", waifu_db)
+
             elif "/grab" in message.caption:
                 for db_collection in [waifu_grabber_bot_db, Husbando_Grabber_Bot_db,
                                       Grab_Your_Waifu_Bot_db, Grab_Your_Husbando_Bot_db,
                                       WaifuXBharatBot_db]:
                     await process_command(message, "/grab", db_collection)
+
             elif "/guess" in message.caption:
-                await process_command(message, "/guess", catch_your_waifu_db)
+                for db_collection_guess in [catch_your_waifu_db, Dark_waifu_Bot_db]:
+                    await process_command(message, "/guess", db_collection_guess)
+
             elif "/hunt" in message.caption:
                 await process_command(message, "/hunt", Hunt_Your_Waifu_Bot_db)
             elif "/collect" in message.caption:

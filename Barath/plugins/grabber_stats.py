@@ -7,7 +7,7 @@ import os
 from config import HANDLER,OWNER_ID
 import asyncio
 
-from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db,lustXcatcherrobot_db
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db,lustXcatcherrobot_db,Dark_waifu_Bot_db
 
 
 
@@ -32,6 +32,7 @@ async def agstats(_, message):
     total_Grab_Your_Husbando_Bot_db = await Grab_Your_Husbando_Bot_db.count_documents({})
     total_WaifuXBharatBot_db = await WaifuXBharatBot_db.count_documents({})
     total_lustXcatcherrobot_db = await lustXcatcherrobot_db.count_documents({})
+    total_Dark_waifu_Bot_db = await Dark_waifu_Bot_db.count_documents({})
     total_allow_chats_collection = await allow_chats_collection.count_documents({})
     toggle_status = await get_all_toggle_status()
 
@@ -39,7 +40,7 @@ async def agstats(_, message):
 AutoUB Statistics:
 ▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱
 
-Total Bots Scrapped: 9
+Total Bots Scrapped: 11
 Total allowed chats: {total_allow_chats_collection}
 
 @CharacterSecureBot: {total_waifu_db}
@@ -52,6 +53,7 @@ Total allowed chats: {total_allow_chats_collection}
 @Grab_Your_Husbando_Bot: {total_Grab_Your_Husbando_Bot_db}
 @WaifuXBharatBot: {total_WaifuXBharatBot_db}
 @lustXcatcherrobot: {total_lustXcatcherrobot_db}
+@Dark_waifu_Bot: {total_Dark_waifu_Bot_db}
 ━━━━━━━━━━━━━━━━━
 Toggle Status:
 {'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
