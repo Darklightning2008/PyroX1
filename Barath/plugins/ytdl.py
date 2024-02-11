@@ -77,59 +77,6 @@ ydl_opts = {
     "quite": True,
 }        
 
-@barath.on_message(filters.command("song",prefixes=HANDLER) & filters.user(OWNER_ID))
-def download_song(_, message):
-    query = " ".join(message.command[1:])  
-    print(query)
-    m = message.reply_text("**🔍**")
-    ydl_ops = {"format": "bestaudio[ext=m4a]"}
-    try:
-        results = YoutubeSearch(query, max_results=1).to_dict()
-        link = f"https://youtube.com{results[0]['url_suffix']}"
-        title = results[0]["title"][:40]
-        thumbnail = results[0]["thumbnails"][0]
-        thumb_name = f"{title}.jpg"
-        thumb = requests.get(thumbnail, allow_redirects=True)
-        open(thumb_name, "wb").write(thumb.content)
-        duration = results[0]["duration"]
-
-    except Exception as e:
-        m.edit("**⚠️ No results were found. Make sure you typed the information correctly**")
-        print(str(e))
-        return
-    m.edit("**Downloading .. Your Request song**")
-    try:
-        with yt_dlp.YoutubeDL(ydl_ops) as ydl:
-            info_dict = ydl.extract_info(link, download=False)
-            audio_file = ydl.prepare_filename(info_dict)
-            ydl.process_info(info_dict)
-        secmul, dur, dur_arr = 1, 0, duration.split(":")
-        for i in range(len(dur_arr) - 1, -1, -1):
-            dur += int(float(dur_arr[i])) * secmul
-            secmul *= 60
-        m.edit("**💀 Uploading ..**")
-        try:
-            message.delete()
-        except:
-            pass
-
-        message.reply_audio(
-            audio_file,
-            thumb=thumb_name,
-            title=title,
-            caption=f"{title}\n**Uploaded by {message.from_user.mention}**",
-            duration=dur
-        )
-        m.delete()
-    except Exception as e:
-        m.edit(" - An error check logs again sor!!")
-        print(e)
-
-    try:
-        os.remove(audio_file)
-        os.remove(thumb_name)
-    except Exception as e:
-        print(e)
 
 
 __mod_name__ = "UTHOOB"  
