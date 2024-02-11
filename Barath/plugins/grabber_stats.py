@@ -115,7 +115,7 @@ async def allbots(_, message):
 
     # Format the counter data for display
     if counter_data:
-        counter_text = "\n".join([f"/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        counter_text = "\n".join([f"{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
         msg = await message.edit(counter_text)
     else:
         await message.edit("No counters found.")
