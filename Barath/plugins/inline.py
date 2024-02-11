@@ -28,8 +28,7 @@ async def help_cmds(_, inline_query):
     ]
 
     # Calculate the number of buttons per column
-    num_buttons = len(buttons)
-    num_buttons_per_column = num_buttons // 2
+    num_buttons_per_column = (len(buttons) + 1) // 2  # Add 1 to ensure the first column has more buttons if the total number is odd
 
     # Create two lists of buttons for each column
     buttons_column1 = buttons[:num_buttons_per_column]
