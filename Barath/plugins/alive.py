@@ -68,6 +68,7 @@ async def ping(_, message):
     msg =  await message.reply_text("Ping...")
     await msg.edit("✮ᑭｴƝGing...✮")
     end_time = time.time()
+    ping_time = round((end_time - start_time) * 1000, 3)
     uptime = get_readable_time((time.time() - StartTime))
     await msg.edit(f"**I Aᴍ Aʟɪᴠᴇ Mᴀꜱᴛᴇʀ**\n⋙ 🔔 **ᑭｴƝG**: {ping_time}\n⋙ ⬆️ **ⴑⲢⲦⲒⲘⲈ**: {uptime}")
     try:
