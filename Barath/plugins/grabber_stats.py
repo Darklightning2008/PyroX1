@@ -80,7 +80,7 @@ async def agstats(_, message):
 <b>Total AutoCaught:</b>
 {all_counters}
 ━━━━━━━━━━━━━━━━━
-<b>Owner: <a href='t.me/LelouchTheZeroo'>Zero</a></b>
+<b>My Master: <a href='t.me/LelouchTheZeroo'>Zero</a></b>
 """
     msg = await  message.reply_text("Getting Stats...")
     await asyncio.sleep(1)
