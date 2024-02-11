@@ -108,15 +108,21 @@ async def agstats(_, message):
 #         await message.reply_text("No counters found.")
 
 
-@barath.on_message(filters.command("allbots", prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("allbots", prefixes=HANDLER))
 async def allbots(_, message):
+    user_id=message.from_user.id
+    if user_id not in OWNER_ID:
+        return
+    msg = await message.reply_text("Getting Bots info...")
+    await asyncio.sleep(1)
+
     # msg =  await message.reply_text("Getting all bots...")
     counter_data = await list_counters()
 
     # Format the counter data for display
     if counter_data:
         counter_text = "\n".join([f"{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
-        msg = await message.edit(counter_text)
+        await msg.edit(counter_text)
     else:
         await message.edit("No counters found.")
     # try:
