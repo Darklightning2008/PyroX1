@@ -16,6 +16,8 @@ from pyrogram.types import (
 
  
 
+from itertools import zip_longest
+
 @bot.on_inline_query(filters.regex("help"))
 async def help_cmds(_, inline_query):
     user_id = (await GET_INFO.barath()).id
@@ -30,9 +32,8 @@ async def help_cmds(_, inline_query):
     # Calculate the number of buttons per column
     num_buttons_per_column = (len(buttons) + 1) // 2  # Add 1 to ensure the first column has more buttons if the total number is odd
 
-    # Create two lists of buttons for each column
-    buttons_column1 = buttons[:num_buttons_per_column]
-    buttons_column2 = buttons[num_buttons_per_column:]
+    # Split the list of buttons into two columns
+    buttons_column1, buttons_column2 = zip_longest(*[iter(buttons)] * num_buttons_per_column, fillvalue=None)
 
     # Create InlineKeyboardMarkup with the custom layout
     inline_keyboard = InlineKeyboardMarkup(
