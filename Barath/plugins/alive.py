@@ -42,13 +42,23 @@ async def alive():
 
 @barath.on_message(filters.command("alive", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def chk_alive(_, message):
-    msg =  await message.reply_text("Checking")
-    alive_text, photo_url = await alive()
-    await msg.edit(photo=photo_url,caption=alive_text)
+    try:
+        msg = await message.reply_text("Checking")
+        alive_text, photo_url = await alive()
+        await msg.delete()
+        await message.reply_photo(
+            photo=photo_url,
+            caption=alive_text
+        )
+    except Exception as e:
+        print("Error:", e)
+        await message.reply_text("An error occurred while checking the status.")
+
     try:
         await message.delete()
     except:
-        return
+        pass
+
 
 
 @barath.on_message(filters.command("ping", prefixes=HANDLER) & filters.user(OWNER_ID))
