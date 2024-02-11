@@ -41,7 +41,7 @@ async def vsong(client, message):
         print(e)
     try:
         me = await barath.get_me()
-        msg = await message.reply("**wait sor 👌 processing**")
+        msg = await message.reply("**Getting Video**")
         with YoutubeDL(ydl_opts) as ytdl:
             ytdl_data = ytdl.extract_info(link, download=True)
             file_name = ytdl.prepare_filename(ytdl_data)
@@ -49,13 +49,16 @@ async def vsong(client, message):
         return await msg.edit(f"🚫 **Error:** {e}")
     preview = wget.download(thumbnail)
     await msg.edit("**Process Complete.\n Now Uploading 🌝**")
+    await msg.delete()
+    try:
+        await message.delete()
+    except:
+        pass
     title = ytdl_data["title"]
     await message.reply_video(file_name,
         duration=int(ytdl_data["duration"]),
         thumb=preview,
         caption=f"{title}\n**Uploaded by {message.from_user.mention}**")
-     
-    await msg.delete()
     try:
         os.remove(file_name)
     except Exception as e:
@@ -78,7 +81,7 @@ ydl_opts = {
 def download_song(_, message):
     query = " ".join(message.command[1:])  
     print(query)
-    m = message.reply("**🔍**")
+    m = message.reply_text("**🔍**")
     ydl_ops = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -94,7 +97,7 @@ def download_song(_, message):
         m.edit("**⚠️ No results were found. Make sure you typed the information correctly**")
         print(str(e))
         return
-    m.edit("**🧐 Downloading .. Your Request song sor w8**")
+    m.edit("**Downloading .. Your Request song**")
     try:
         with yt_dlp.YoutubeDL(ydl_ops) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -104,7 +107,11 @@ def download_song(_, message):
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(float(dur_arr[i])) * secmul
             secmul *= 60
-        m.edit("**💀 Uploading .. For You sor w8**")
+        m.edit("**💀 Uploading ..**")
+        try:
+            message.delete()
+        except:
+            pass
 
         message.reply_audio(
             audio_file,
