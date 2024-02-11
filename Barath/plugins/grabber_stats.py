@@ -119,7 +119,7 @@ async def allbots(_, message):
         msg = await message.edit(counter_text)
     else:
         await message.edit("No counters found.")
-    try:
-        await message.delete()
-    except:
-        return
+    # try:
+    #     await message.delete()
+    # except:
+    #     return
