@@ -8,6 +8,7 @@ from Barath import barath, get_readable_time, StartTime
 from Barath import bot, MODULE
 
 async def alive():
+    start_time = time.time()
     katsuki = "3.01"
     user = await barath.get_me()
     name = user.first_name
@@ -16,7 +17,6 @@ async def alive():
     user_hyperlink = f"[{name}]({user_profile_link})" if user_profile_link else name
     dbhealth = "ᴡᴏʀᴋɪɴɢ"
     uptime = get_readable_time((time.time() - StartTime))
-    start_time = time.time()
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
     
@@ -36,7 +36,7 @@ async def alive():
 
 <b>ᴜꜱᴇʀʙᴏᴛ</b> {user_hyperlink}
 
-<b> ᴊᴏʙ ɪꜱ ᴛᴏ ꜱᴇʀᴠᴇ ᴍʏ ᴍᴀꜱᴛᴇʀ  <a href='{SOURCE}'>ᴋɪʀᴀ</a></b>"""
+<b>ᴍʏ ᴊᴏʙ ɪꜱ ᴛᴏ ꜱᴇʀᴠᴇ ᴍʏ ᴍᴀꜱᴛᴇʀ  <a href='{SOURCE}'>ᴋɪʀᴀ</a></b>"""
 
 
     return ALIVE_TEXT, photo_url
