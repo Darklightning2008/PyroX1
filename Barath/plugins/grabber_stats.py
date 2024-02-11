@@ -110,7 +110,7 @@ async def agstats(_, message):
 
 @barath.on_message(filters.command("allbots", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def allbots(_, message):
-    msg =  await message.reply_text("Getting all bots...")
+    # msg =  await message.reply_text("Getting all bots...")
     counter_data = await list_counters()
 
     # Format the counter data for display
