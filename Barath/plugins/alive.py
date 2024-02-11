@@ -2,7 +2,7 @@ import time
 import random 
 import asyncio
 import config
-from config import HANDLER, OWNER_ID, BARATH
+from config import HANDLER, OWNER_ID, BARATH,SOURCE
 from pyrogram import filters, __version__ as pyrover, enums
 from Barath import barath, get_readable_time, StartTime
 from Barath import bot, MODULE
@@ -20,23 +20,24 @@ async def alive():
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
     
-    ALIVE_TEX = " 𝙷𝙴𝚈 , 𝙱𝙰𝙱𝙴 😍 𝙸 𝙰𝙼 𝙰𝙻𝙸𝚅𝙴"
+    ALIVE_TEX = "ɪ ᴀᴍ ᴀʟɪᴠᴇ ᴍᴀꜱᴛᴇʀ"
     EMOTES = ["😍", "💀", "😊", "👋", "🎉", "🔥", "🌟", "💫", "🚀", "🤖", "👻", "👾", "🧡"]
 
-    photo_url = "https://te.legra.ph/file/4489fb9f5bccfe210def1.jpg"
+    photo_url = "https://telegra.ph/file/e90d5a6fcca486f10025b.mp4"
     
     ALIVE_TEXT = f"""{ALIVE_TEX}
+▰▱▰▱▰▱▰▱▰▱▰▱▰
 
-ㅤ╔══════💫✨💫═════╗
-¹┃ㅤ{random.choice(EMOTES)} s ᴛ ᴀ ᴛ ᴜ s ➫ {dbhealth}
-²┃ㅤ{random.choice(EMOTES)} ᴋᴀᴛsᴜᴋɪ   ʙ ᴏ ᴛ ➫ {katsuki}
-³┃ㅤ{random.choice(EMOTES)} ᴜ ᴘ ᴛ ɪ ᴍ ᴇ ➫ {uptime}
-⁴┃ㅤ{random.choice(EMOTES)} ᴘ ɪ ɴ ɢ ➫ {ping_time} ms
-⁵┃ㅤ{random.choice(EMOTES)} ᴘ ʏ ᴛ ʜ ᴏ ɴ ➫ {pyrover}
-ㅤ╚══════💫✨💫═════╝
-ㅤ╔═════🇮🇳🇮🇳🇮🇳🇮🇳═════╗
-⁶┃ {random.choice(EMOTES)} s ᴇ ɴ s ᴇ ɪ ➫ {user_hyperlink}
-ㅤ╚═════🇮🇳🇮🇳🇮🇳🇮🇳═════╝"""
+➤ <b>ꜱᴛᴀᴛᴜꜱ:</b> {dbhealth}
+➤ <b>ᴠᴇʀꜱɪᴏɴ:</b> {katsuki}
+➤ <b>ᴜᴘᴛɪᴍᴇ:</b> {uptime}
+➤ <b>ᴘɪɴɢ:</b> {ping_time} ms
+➤ <b>Python:</b> {pyrover}
+
+<b>ᴜꜱᴇʀʙᴏᴛ</b> {user_hyperlink}
+
+<b> ᴊᴏʙ ɪꜱ ᴛᴏ ꜱᴇʀᴠᴇ ᴍʏ ᴍᴀꜱᴛᴇʀ  <a href='{SOURCE}'>ᴋɪʀᴀ</a></b>"""
+
 
     return ALIVE_TEXT, photo_url
 
@@ -46,7 +47,7 @@ async def chk_alive(_, message):
         msg = await message.reply_text("Checking")
         alive_text, photo_url = await alive()
         await msg.delete()
-        await message.reply_photo(
+        await message.reply_animation(
             photo=photo_url,
             caption=alive_text
         )
