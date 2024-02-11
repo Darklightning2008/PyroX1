@@ -2,7 +2,8 @@ from Barath import bot
 from pyrogram import filters
 from pyrogram.types import Photo
 import re
-from Barath.barath_db.auto_catch_db import Dark_waifu_Bot_db as waifu_db
+from Barath.barath_db.auto_catch_db import waifu_prox_bot_db as waifu_db
+
 
 def kela_mela(caption: str):
     if "🌸" in caption:
@@ -15,7 +16,9 @@ def kela_mela(caption: str):
         next_word = re.search(r'\n\d+:\s*([^\n]+)', caption)
         next_word = next_word.group(1).split()[0] if next_word else "nothing"
     else:
-        next_word = "nothing"
+        # If none of the above patterns match, try to find the character name
+        next_word = re.search(r'𝐍𝐀𝐌𝐄\s*:\s*([^\n]+)', caption)
+        next_word = next_word.group(1).split()[0] if next_word else "nothing"
 
     return next_word.strip()
 

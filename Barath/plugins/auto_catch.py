@@ -7,7 +7,7 @@ from Barath.barath_db.auto_catch_db import (
     Hunt_Your_Waifu_Bot_db, Character_Catcher_Bot_db,
     Husbando_Grabber_Bot_db, Grab_Your_Waifu_Bot_db,
     Grab_Your_Husbando_Bot_db, WaifuXBharatBot_db,
-    lustXcatcherrobot_db,Dark_waifu_Bot_db
+    lustXcatcherrobot_db,Dark_waifu_Bot_db,waifu_prox_bot_db
 )
 from Barath.plugins.allow_chat import is_group_allowed
 from Barath.plugins.toggles import get_command_status
@@ -59,8 +59,8 @@ async def guess(_, message):
             elif "/collect" in message.caption:
                 await process_command(message, "/collect", Character_Catcher_Bot_db)
                 await increment_counter("collect")
-            elif "/slave" in message.caption:
-                await process_command(message, "/slave", lustXcatcherrobot_db)
-                await increment_counter("slave")
+            elif "/loot" in message.caption:
+                await process_command(message, "/loot", waifu_prox_bot_db)
+                await increment_counter("loot")
 
             await increment_counter("total_caught")

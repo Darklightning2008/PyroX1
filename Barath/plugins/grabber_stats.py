@@ -7,7 +7,7 @@ import os
 from config import HANDLER,OWNER_ID
 import asyncio
 
-from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db,lustXcatcherrobot_db,Dark_waifu_Bot_db
+from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db,lustXcatcherrobot_db,Dark_waifu_Bot_db,waifu_prox_bot_db
 
 from Barath.barath_db.counter_db  import list_counters,get_counter
 
@@ -44,6 +44,7 @@ async def agstats(_, message):
     total_WaifuXBharatBot_db = await WaifuXBharatBot_db.count_documents({})
     total_lustXcatcherrobot_db = await lustXcatcherrobot_db.count_documents({})
     total_Dark_waifu_Bot_db = await Dark_waifu_Bot_db.count_documents({})
+    total_waifu_prox_bot_db = await waifu_prox_bot_db.count_documents({})
     total_allow_chats_collection = await allow_chats_collection.count_documents({})
     toggle_status = await get_all_toggle_status()
     total_caught = await get_counter("total_caught")
@@ -56,7 +57,7 @@ async def agstats(_, message):
 <b>AutoUB Statistics:</b>
 ▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱
 
-<b>Total Bots Scrapped:</b> 11
+<b>Total Bots Scrapped:</b> 12
 <b>Total allowed chats:</b> {total_allow_chats_collection}
 
 <a href='t.me/CharacterSecureBot'>Character Secure</a>: {total_waifu_db}
@@ -70,6 +71,7 @@ async def agstats(_, message):
 <a href='t.me/WaifuXBharatBot'>Waifu Bharat</a>: {total_WaifuXBharatBot_db}
 <a href='t.me/lustXcatcherrobot'>Lust Catcher</a>: {total_lustXcatcherrobot_db}
 <a href='t.me/Dark_waifu_Bot'>Dark Waifu</a>: {total_Dark_waifu_Bot_db}
+<a href='t.me/Dark_waifu_Bot'>Loot Waifu</a>: {total_waifu_prox_bot_db}
 ━━━━━━━━━━━━━━━━━
 <b>Commands Status:</b>
 {'\n'.join(f"{cmd}: {'Enabled' if toggle_status.get(cmd, False) else 'Disabled'}" for cmd in toggle_status)}
