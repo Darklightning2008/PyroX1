@@ -39,7 +39,17 @@ async def alive():
 ㅤ╚═════🇮🇳🇮🇳🇮🇳🇮🇳═════╝"""
 
     return ALIVE_TEXT, photo_url
-    
+
+@barath.on_message(filters.command("alive", prefixes=HANDLER) & filters.user(OWNER_ID))
+async def chk_alive(_, message):
+    msg =  await message.reply_text("Checking")
+    alive_text, photo_url = await alive()
+    await msg.edit(photo=photo_url,caption=alive_text)
+    try:
+        await message.delete()
+    except:
+        return
+
 
 @barath.on_message(filters.command("ping", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def ping(_, message):
@@ -49,7 +59,7 @@ async def ping(_, message):
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
     uptime = get_readable_time((time.time() - StartTime))
-    await msg.edit(f"\ (•◡•) / **ɪ ᴀᴍ ᴀʟɪᴠᴇ ʙᴀʙʏ**\n⋙ 🔔 **ᑭｴƝG**: {ping_time}\n⋙ ⬆️ **ⴑⲢⲦⲒⲘⲈ**: {uptime}")
+    await msg.edit(f"**I Aᴍ Aʟɪᴠᴇ Mᴀꜱᴛᴇʀ**\n⋙ 🔔 **ᑭｴƝG**: {ping_time}\n⋙ ⬆️ **ⴑⲢⲦⲒⲘⲈ**: {uptime}")
     try:
         await message.delete()
     except:
