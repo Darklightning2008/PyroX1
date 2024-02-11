@@ -26,7 +26,7 @@ async def get_counters_data():
 
     # Format the counter data for display
     if counter_data:
-        counter_text = "\n".join([f" ➣/{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
+        counter_text = "\n".join([f" ➣{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
         return counter_text
     else:
         return "No Data Found!"
@@ -64,10 +64,9 @@ async def allbots(_, message):
     if counter_data:
         counter_text = "\n".join([f"{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
         await msg.edit(counter_text)
-        await message.delete()
     else:
         await message.edit("No counters found.")
-    # try:
-    #     await message.delete()
-    # except:
-    #     return
+    try:
+        await message.delete()
+    except:
+        return

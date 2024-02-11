@@ -101,7 +101,7 @@ async def agstats(_, message):
 
 
     data = f"""
-<b>AutoUB Statistics:</b>
+<b><u>AutoUB Statistics:</u></b>
 ▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱
 
 ━━━━━━━━━━━
@@ -147,7 +147,7 @@ __help__ = """
 - alive: to check bot on/off
 - ping: check response of server
 """  
-    
-    
+
+
 string = {"module": __mod_name__, "help": __help__}   
 MODULE.append(string)
