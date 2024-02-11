@@ -9,7 +9,7 @@ from Barath import bot, MODULE
 
 from Barath.barath_db.auto_catch_db import waifu_db,waifu_grabber_bot_db,catch_your_waifu_db,Hunt_Your_Waifu_Bot_db,Character_Catcher_Bot_db,Husbando_Grabber_Bot_db,Grab_Your_Waifu_Bot_db,Grab_Your_Husbando_Bot_db,WaifuXBharatBot_db,allow_chats_collection,toggle_db,lustXcatcherrobot_db,Dark_waifu_Bot_db,waifu_prox_bot_db
 from Barath.barath_db.counter_db  import get_counter
-from  grabber_stats import get_all_toggle_status,get_counters_data
+from  Barath.plugins.grabber_stats import get_all_toggle_status,get_counters_data
 
 async def alive():
     start_time = time.time()
