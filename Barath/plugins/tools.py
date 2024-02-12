@@ -13,7 +13,7 @@ def fetch_data(api_url: str, query: str) -> tuple:
         data = response.json()
         return data.get("content", "No response from the API."), data.get("images", False)
     except requests.exceptions.RequestException as e:
-        return None, f"Request error: {e}"
+        return None, f"doRequest error: {e}"
     except Exception as e:
         return None, f"An error occurred: {str(e)}"
 
