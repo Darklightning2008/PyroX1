@@ -142,6 +142,10 @@ async def weather(_, m: Message):
         ),
     )
     loc_json = r.json()
+    try:
+        await m.delete()
+    except:
+        return
 
     if not loc_json.get("location"):
         await msg.edit("ʟᴏᴄᴀᴛɪᴏɴ ɴᴏᴛ ғᴏᴜɴᴅ")
