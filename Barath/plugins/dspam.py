@@ -71,6 +71,18 @@ async def spam_handler(_, m: Message):
     except Exception as e:
         print(e)  # Print the error to the console for debugging purposes
 
+
+@barath.on_message(filters.command(["say"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+async def say(_, m: Message):
+    chat_id = m.chat.id
+    text = int(m.command[1])
+    try:
+        await m.delete()
+    except:
+        return
+    barath.send_message(chat_id,text)
+
+
 __mod_name__ = "SPAM"  
     
 __help__ = """  
