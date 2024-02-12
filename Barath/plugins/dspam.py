@@ -75,7 +75,8 @@ async def spam_handler(_, m: Message):
 @barath.on_message(filters.command(["say"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def say(_, m: Message):
     chat_id = m.chat.id
-    text = str(m.command[1:])
+    cmd = m.command
+    text = " ".join(cmd[2:]).strip()
     try:
         await m.delete()
     except:
@@ -91,7 +92,8 @@ async def send_msg(_, m: Message):
         return
 
     id = int(m.command[1])
-    text = str(m.command[2:])
+    cmd = m.command
+    text = " ".join(cmd[2:]).strip()
     try:
         await barath.send_message(id,text)
         msg.edit("Sent Successfully")
