@@ -1,8 +1,9 @@
 from Barath import barath
 import requests
+from config import HANDLER,OWNER_ID
 from pyrogram import filters,types
 
-@barath.on_message(filters.command("bard"))
+@barath.on_message(filters.command("bard",prefixes=HANDLER) & filters.user(OWNER_ID))
 async def bard(client,message):
     msg = await message.reply_text("Getting Response...")
     prompt = None
