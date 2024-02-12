@@ -93,9 +93,9 @@ async def send_msg(_, m: Message):
     text = " ".join(cmd[2:]).strip()
 
     if len(cmd) < 2:
-        await barath.reply_text(f"Use like this: {config.HANDLER}smsg [user/chatid] [text messages]")
+        await m.reply_text(f"Use like this: {config.HANDLER}smsg [user/chatid] [text messages]")
         return
-    msg =  barath.reply_text("Trying to send msg...")
+    msg =  m.reply_text("Trying to send msg...")
     
     try:
         await barath.send_message(id,text)
