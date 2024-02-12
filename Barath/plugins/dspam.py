@@ -77,6 +77,9 @@ async def say(_, m: Message):
     chat_id = m.chat.id
     cmd = m.command
     text = " ".join(cmd[1:]).strip()
+    if len(cmd) < 2:
+        await barath.reply_text(f"Provide text.eg {config.HANDLER}.say [text messages]")
+        return
     try:
         await m.delete()
     except:
@@ -85,17 +88,15 @@ async def say(_, m: Message):
 
 @barath.on_message(filters.command(["smsg"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def send_msg(_, m: Message):
-    cmd = m.command
-
-    if len(cmd) < 2:
-        await barath.reply_text(f"Use like this: {config.HANDLER}spam [user/chatid] [text messages]")
-        return
-    msg =  barath.reply_text("Trying to send msg...")
-    
-
     id = int(m.command[1])
     cmd = m.command
     text = " ".join(cmd[2:]).strip()
+
+    if len(cmd) < 2:
+        await barath.reply_text(f"Use like this: {config.HANDLER}smsg [user/chatid] [text messages]")
+        return
+    msg =  barath.reply_text("Trying to send msg...")
+    
     try:
         await barath.send_message(id,text)
         msg.edit("Sent Successfully")
