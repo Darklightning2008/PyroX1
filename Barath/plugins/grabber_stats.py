@@ -226,16 +226,16 @@ async def spacebin(text: str):
 """
     return string
 
-@barath.on_message(filters.command("paste", HANDLER)  & filters.user(OWNER_ID))
+@barath.on_message(filters.command("paste", HANDLER) & filters.user(OWNER_ID))
 async def paste(_, message):
     # share your codes on https://spacebin.in
-    msg =  message.reply_text("Trying...")
+    msg = await message.reply_text("Trying...")  # Added await here
     if not message.reply_to_message:
         try:
             text = message.text.split(None, 1)[1]
         except IndexError:
             await msg.edit("=> Input text to paste else reply.")
-            return 
+            return
 
         link = await spacebin(text)
         await msg.edit(link, disable_web_page_preview=True)
@@ -264,3 +264,4 @@ async def paste(_, message):
             await msg.edit("=> Error processing the document.")
     else:
         await msg.edit("=> I am unable to paste this.")
+
