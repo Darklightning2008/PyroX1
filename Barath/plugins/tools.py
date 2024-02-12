@@ -2,6 +2,7 @@ import requests
 from pyrogram import filters, Client
 from pyrogram.types import Message, InputMediaPhoto
 from Barath import barath
+from config import HANDLER,OWNER_ID
 from pyrogram.errors import MediaCaptionTooLong
 
 api_url_chat5 = "https://tofu-api.onrender.com/chat/bard"
@@ -17,7 +18,7 @@ def fetch_data(api_url: str, query: str) -> tuple:
     except Exception as e:
         return None, f"An error occurred: {str(e)}"
 
-@barath.on_message(filters.command(["bard"]))
+@barath.on_message(filters.command("bard", HANDLER) & filters.user(OWNER_ID))
 async def chatgpt5(_, message: Message):
     chat_id = message.chat.id
     message_id = message.id
