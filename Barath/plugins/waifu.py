@@ -3,7 +3,7 @@ import requests
 import asyncio
 from Barath import barath
 from Barath import MODULE, bot, INFO as GET_INFO
-from config import OWNER_ID
+from config import OWNER_ID,LOG_CHAT
 from pyrogram import filters
 from pyrogram.types import (
     InlineQueryResultArticle,
@@ -38,7 +38,7 @@ async def get_helpdex(_, message):
                 if result and result.results:
                     for inline_result in result.results:
                         await barath.send_inline_bot_result(
-                            chat_id=-1002119409366,  # chat id to send
+                            chat_id=LOG_CHAT,  # chat id to send
                             query_id=result.query_id,
                             result_id=inline_result.id,
                             disable_notification=True,

@@ -3,7 +3,7 @@ from pyrogram import filters
 from pyrogram.types import Photo
 import re
 from Barath.barath_db.auto_catch_db import waifu_prox_bot_db as waifu_db
-
+from config import LOG_CHAT
 
 def kela_mela(caption: str):
     if "🌸" in caption:
@@ -34,6 +34,10 @@ def process_and_insert(photo_id, message_id, caption: str):
 
 @bot.on_message(filters.incoming & filters.photo)
 async def modify_and_send(_, message):
+    chat_id = message.chat.id
+    if chat_id != LOG_CHAT:
+        return
+
     photo_id = message.photo.file_unique_id
     photoid = message.photo.file_id
     message_id = message.id
