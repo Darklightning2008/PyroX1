@@ -23,3 +23,4 @@ motor
 aiofiles
 aiohttp
 httpx
+httpx[http2]
