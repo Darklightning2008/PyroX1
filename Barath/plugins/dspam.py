@@ -75,7 +75,7 @@ async def spam_handler(_, m: Message):
 @barath.on_message(filters.command(["say"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
 async def say(_, m: Message):
     chat_id = m.chat.id
-    text = int(m.command[1])
+    text = str(m.command[1])
     try:
         await m.delete()
     except:
