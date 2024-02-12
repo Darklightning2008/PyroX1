@@ -19,4 +19,4 @@ async def handwriting(_, message):
     await m.edit("» Uploading...")
     await m.delete()
     me = await barath.get_me()
-    await message.reply_photo(url, caption=f"""**🥀 Made by {me.mention}**""")
+    await message.reply_photo(url)

@@ -22,3 +22,4 @@ FFmpeg==1.4
 motor
 aiofiles
 aiohttp
+httpx
