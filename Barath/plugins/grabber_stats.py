@@ -3,9 +3,10 @@ from pyrogram.types import Message
 
 from Barath import barath
 from requests import get
-
+import datetime
+import config
 from Barath.barath_db.auto_catch_db import toggle_db
-
+from Barath.helpers.help_func import make_carbon
 import os
 from config import HANDLER,OWNER_ID
 import asyncio
@@ -176,3 +177,90 @@ async def weather(_, m: Message):
         )
 
         await msg.edit(res)
+
+@barath.on_message(filters.command("carbon",prefixes=HANDLER) & filters.user(OWNER_ID))
+async def carbon(_, m: Message):
+    msg = m.reply_text("Trying...")
+    if m.reply_to_message:
+        if m.reply_to_message.text:
+            txt = m.reply_to_message.text
+        else:
+            return await msg.edit("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ.")
+    else:
+        try:
+            txt = m.text.split(None, 1)[1]
+        except IndexError:
+            return await msg.edit("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ.")
+    m = await msg.edit("ɢᴇɴᴇʀᴀᴛɪɴɢ ᴄᴀʀʙᴏɴ...")
+    carbon = await make_carbon(txt)
+    await msg.edit("ᴜᴩʟᴏᴀᴅɪɴɢ ɢᴇɴᴇʀᴀᴛᴇᴅ ᴄᴀʀʙᴏɴ...")
+    await barath.send_photo(
+        m.chat.id,
+        photo=carbon,
+    )
+    await m.delete()
+    carbon.close()
+
+
+async def convert_to_datetime(timestamp): # Unix timestamp
+    try:
+        date = datetime.datetime.fromtimestamp(timestamp)
+        return date
+    except Exception as e:
+        print(f"Error converting timestamp: {e}")
+        return ""
+
+async def spacebin(text: str):
+    url = "https://spaceb.in/api/v1/documents/"
+    response = requests.post(url, data={"content": text, "extension": "txt"})
+    id = response.json().get('payload').get('id')
+    res = requests.get(f"https://spaceb.in/api/v1/documents/{id}").json()
+    created_at = res.get("payload").get("created_at")
+    link = f"https://spaceb.in/{id}"
+    raw = f"https://spaceb.in/api/v1/documents/{id}/raw"
+    timedate = await convert_to_datetime(created_at)
+    string = f"""\u0020
+**Here's the link**: **[Paste link]({link})**
+**Here's the link**: **[Raw View]({raw})**
+**Created datetime**: {timedate}
+"""
+    return string
+
+@barath.on_message(filters.command("paste", HANDLER)  & filters.user(OWNER_ID))
+async def paste(_, message):
+    # share your codes on https://spacebin.in
+    msg =  message.reply_text("Trying...")
+    if not message.reply_to_message:
+        try:
+            text = message.text.split(None, 1)[1]
+        except IndexError:
+            await msg.edit("=> Input text to paste else reply.")
+            return 
+
+        link = await spacebin(text)
+        await msg.edit(link, disable_web_page_preview=True)
+        return
+
+    elif bool(message.reply_to_message.text or message.reply_to_message.caption):
+        if message.reply_to_message.text:
+            text = message.reply_to_message.text
+        elif message.reply_to_message.caption:
+            text = message.reply_to_message.caption
+
+        link = await spacebin(text)
+        await msg.edit(link, disable_web_page_preview=True)
+        return
+
+    elif (message.reply_to_message.document and bool(message.reply_to_message.document.mime_type.startswith("text/"))):
+        try:
+            path = await barath.download_media(message.reply_to_message)
+            with open(path, "r") as file:
+                text = file.read()
+            os.remove(path)
+            link = await spacebin(text)
+            await msg.edit(link, disable_web_page_preview=True)
+        except Exception as e:
+            print(f"Error processing document: {e}")
+            await msg.edit("=> Error processing the document.")
+    else:
+        await msg.edit("=> I am unable to paste this.")

@@ -7,6 +7,8 @@ import requests
 import datetime 
 import pytz
 import re
+from io import BytesIO
+from aiohttp import ClientSession
 
 
 
@@ -166,3 +168,11 @@ async def denied_users(filter, client: Client, message: Message):
         return False
     else:
         return True
+
+
+async def make_carbon(code):
+    url = "https://carbonara.solopov.dev/api/cook"
+    async with ClientSession().post(url, json={"code": code}) as resp:
+        image = BytesIO(await resp.read())
+    image.name = "carbon.png"
+    return image
