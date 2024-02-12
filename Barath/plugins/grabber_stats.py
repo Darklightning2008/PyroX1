@@ -178,9 +178,9 @@ async def weather(_, m: Message):
 
         await msg.edit(res)
 
-@barath.on_message(filters.command("carbon",prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("carbon", prefixes=HANDLER) & filters.user(OWNER_ID))
 async def carbon(_, m: Message):
-    msg = m.reply_text("Trying...")
+    msg = await m.reply_text("Trying...")  # Await here
     if m.reply_to_message:
         if m.reply_to_message.text:
             txt = m.reply_to_message.text
@@ -193,7 +193,7 @@ async def carbon(_, m: Message):
             return await msg.edit("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ.")
     m = await msg.edit("ɢᴇɴᴇʀᴀᴛɪɴɢ ᴄᴀʀʙᴏɴ...")
     carbon = await make_carbon(txt)
-    await msg.edit("ᴜᴩʟᴏᴀᴅɪɴɢ ɢᴇɴᴇʀᴀᴛᴇᴅ ᴄᴀʀʙᴏɴ...")
+    await m.edit("ᴜᴩʟᴏᴀᴅɪɴɢ ɢᴇɴᴇʀᴀᴛᴇᴅ ᴄᴀʀʙᴏɴ...")
     await barath.send_photo(
         m.chat.id,
         photo=carbon,
