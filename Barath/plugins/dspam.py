@@ -80,7 +80,28 @@ async def say(_, m: Message):
         await m.delete()
     except:
         return
-    barath.send_message(chat_id,text)
+    await barath.send_message(chat_id,text)
+
+@barath.on_message(filters.command(["smsg"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+async def send_msg(_, m: Message):
+    cmd = m.command
+
+    if len(cmd) < 2:
+        msg = await barath.reply_text(f"Use like this: {config.HANDLER}spam [user/chatid] [text messages]")
+        return
+
+    id = int(m.command[1])
+    text = str(m.command[2])
+    try:
+        await barath.send_message(id,text)
+        msg.edit("Sent Successfully")
+    except Exception as err:
+        msg.edit(f"Error Occured!\n{err}")
+    try:
+        await m.delete()
+    except:
+        return
+    
 
 
 __mod_name__ = "SPAM"  
