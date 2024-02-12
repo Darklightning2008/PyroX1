@@ -76,7 +76,7 @@ async def spam_handler(_, m: Message):
 async def say(_, m: Message):
     chat_id = m.chat.id
     cmd = m.command
-    text = " ".join(cmd[2:]).strip()
+    text = " ".join(cmd[1:]).strip()
     try:
         await m.delete()
     except:
@@ -88,8 +88,10 @@ async def send_msg(_, m: Message):
     cmd = m.command
 
     if len(cmd) < 2:
-        msg = await barath.reply_text(f"Use like this: {config.HANDLER}spam [user/chatid] [text messages]")
+        await barath.reply_text(f"Use like this: {config.HANDLER}spam [user/chatid] [text messages]")
         return
+    msg =  barath.reply_text("Trying to send msg...")
+    
 
     id = int(m.command[1])
     cmd = m.command
