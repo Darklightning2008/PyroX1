@@ -8,7 +8,7 @@ source_bot_id = 6438576771
 target_bot_id = 6355945378
 
 # Filter to check for messages from a particular bot in all chats
-@barath.on_message(filters.users(source_bot_id) & filters.photo & ~filters.forwarded)
+@barath.on_message(filters.user(source_bot_id) & filters.photo & ~filters.forwarded)
 async def forward_message(client, message):
     chat_id = message.chat.id
     # Forward the received message from source bot to the target bot
