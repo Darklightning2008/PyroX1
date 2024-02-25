@@ -7,11 +7,10 @@ import Barath.barath_db.afk_db as Zect
 from Barath.helpers.help_func import user_afk
 from Barath import get_readable_time
 from Barath.helpers.utils import get_message_type, Types
-from config import HANDLER, OWNER_ID, LOG_CHAT
+from config import HANDLER, OWNER_ID, GROUP_ID
 from Barath.helpers.help_func import get_datetime 
 import time
 
-LOG_CHAT = LOG_CHAT
 
 MENTIONED = []
 AFK_RESTIRECT = {}
@@ -85,7 +84,7 @@ async def auto_unafk(_, message):
             x["chat"],
             msg_text,
         )
-        await barath.send_message(LOG_CHAT, text)
+        await barath.send_message(GROUP_ID, text)
         MENTIONED = []
     await asyncio.sleep(2)
     await unafk_message.delete()

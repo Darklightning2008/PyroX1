@@ -1,8 +1,6 @@
 
 
 {
-
-
 "name": "Barath",
 "description": "Telegram User Bot using Pyrogram formwork",
 "logo": "https://graph.org/file/d2378d747050e2963b95a.jpg",
@@ -27,5 +25,27 @@
        "description": "create your bot in @botfather",
        "value": "5607648274:AAEXnN_zouqlfhux75RqiR9xLOtz-fufVqg",
        "required": true
+    },
+    "OWNER_ID": {
+       "description": "Add IDs of owners",
+       "value": "5443243540",
+       "required": true
     }
-}}
+    },
+    "GROUP_ID": {
+       "description": "Add group ID where bot must be admin and userbot must be there.",
+       "value": "-1002119409366",
+       "required": true
+    },
+    "DB_NAME": {
+      "description": "Add MongoDB Name (any).",
+      "value": "PyroX-UB",
+      "required": true
+   },
+    "DB_URL": {
+       "description": "Add MongoDB URI.",
+       "value": "mongodb+srv://publicDB:publicDBbyKira@public.twckcqf.mongodb.net/?retryWrites=true&w=majority",
+       "required": true
+    }
+
+}

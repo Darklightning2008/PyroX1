@@ -1,8 +1,8 @@
 
 
-from Barath import cli
+from Barath import db
 
-collection = cli["Barath"]["gmute"]
+collection = db["gmute"]
 
 
 async def gmute_user(chat):

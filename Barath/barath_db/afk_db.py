@@ -1,7 +1,7 @@
-from Barath import cli
+from Barath import db
 import asyncio
 
-collection = cli["Barath"]["afk"]
+collection = db["afk"]
 
 
 async def set_afk(afk_status, afk_since, reason):

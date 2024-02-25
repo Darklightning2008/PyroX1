@@ -5,7 +5,6 @@ from Barath import barath
 from requests import get
 import datetime
 import config
-from Barath.barath_db.auto_catch_db import toggle_db
 from Barath.helpers.help_func import make_carbon
 import os
 from config import HANDLER,OWNER_ID
@@ -25,49 +24,6 @@ url = "https://api.weather.com/v3/aggcommon/v3-wx-observations-current"
 headers = {
     "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 12; M2012K11AG Build/SQ1D.211205.017)"
 }
-
-async def get_all_toggle_status():
-    cursor = toggle_db.find({})
-    toggle_status = {}
-    async for document in cursor:
-        command_name = document['command_name']
-        enabled = document['enabled']
-        toggle_status[command_name] = enabled
-    return toggle_status
-
-async def get_counters_data():
-    # Get the list of counters and their values
-    counter_data = await list_counters()
-
-    # Format the counter data for display
-    if counter_data:
-        counter_text = "\n".join([f" ➣{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
-        return counter_text
-    else:
-        return "No Data Found!"
-
-
-@barath.on_message(filters.command("allbots", prefixes=HANDLER))
-async def allbots(_, message):
-    user_id=message.from_user.id
-    if user_id not in OWNER_ID:
-        return
-    msg = await message.reply_text("Getting Bots info...")
-    await asyncio.sleep(1)
-
-    # msg =  await message.reply_text("Getting all bots...")
-    counter_data = await list_counters()
-
-    # Format the counter data for display
-    if counter_data:
-        counter_text = "\n".join([f"{counter_name}: {counter_value}" for counter_name, counter_value in counter_data.items()])
-        await msg.edit(counter_text)
-    else:
-        await message.edit("No counters found.")
-    try:
-        await message.delete()
-    except:
-        return
 
 
 @barath.on_message(filters.command("song",prefixes=HANDLER) & filters.user(OWNER_ID))

@@ -1,7 +1,7 @@
-from Barath import cli
+from Barath import db
 import asyncio
 
-collection = cli["Barath"]["pmpermit"]
+collection = db["pmpermit"]
 
 
 

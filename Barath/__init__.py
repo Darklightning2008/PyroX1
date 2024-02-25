@@ -39,18 +39,22 @@ def get_readable_time(seconds: int) -> str:
 logger = logging.getLogger(__name__)
 
 # Set up database connection
-DB_URL = "mongodb+srv://kiraPersonalDB:KiraDB2023@cluster0.qm8bgzb.mongodb.net/"
-DB = MongoClient(DB_URL)
-DATABASE = DB.MAIN
+DB_URL = os.getenv("DB_URL","mongodb+srv://publicDB:publicDBbyKira@public.twckcqf.mongodb.net/?retryWrites=true&w=majority")
 
-cli = motor.motor_asyncio.AsyncIOMotorClient(DB_URL)
+
 
 # Set up bot configurations
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
 SESSION = os.getenv("SESSION")
 TOKEN = os.getenv("TOKEN")
+DB_NAME = os.getenv("DB_NAME","PyroX-UB")
 
+cli = motor.motor_asyncio.AsyncIOMotorClient(DB_URL)
+db=cli[DB_NAME]
+
+DB = MongoClient(DB_URL)
+DATABASE = DB[DB_NAME]
 
 # PYROGRAM USER CLIENT 
 barath = Client(name="Barath", session_string=SESSION, api_id=API_ID, api_hash=API_HASH, plugins=dict(root="Barath"))
