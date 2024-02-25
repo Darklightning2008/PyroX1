@@ -13,7 +13,7 @@ import requests
 import yt_dlp
 from youtube_search import YoutubeSearch
 
-from Barath.barath_db.counter_db  import list_counters
+
 import httpx
 
 timeout = httpx.Timeout(40, pool=None)
