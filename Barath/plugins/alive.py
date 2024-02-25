@@ -29,14 +29,14 @@ async def alive():
 ▰▱▰▱▰▱▰▱▰▱▰▱▰
 
 ➤ <b>ꜱᴛᴀᴛᴜꜱ:</b> {dbhealth}
-➤ <b>ᴠᴇʀꜱɪᴏɴ:</b> {katsuki}
+➤ <b>ᴠᴇʀꜱɪᴏɴ:</b> {akatsuki}
 ➤ <b>ᴜᴘᴛɪᴍᴇ:</b> {uptime}
 ➤ <b>ᴘɪɴɢ:</b> {ping_time} ms
 ➤ <b>Python:</b> {pyrover}
 
 <b>ᴜꜱᴇʀʙᴏᴛ</b> {user_hyperlink}
 
-<b>Source: <a href='{SOURCE}'>PyroX-V2</a></b>"""
+<b>Source: <a href='{SOURCE}'>Barathub</a></b>"""
 
 
     return ALIVE_TEXT, photo_url
