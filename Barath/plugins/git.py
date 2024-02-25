@@ -5,7 +5,7 @@ from requests import get
 import os
 import config
 
-@barath.on_message(filters.user(config.OWNER_ID) & filters.command("git",prefixes=config.HANDLER))
+@barath.on_message(filters.me & filters.command("git",prefixes=config.HANDLER))
 async def git(_, message):
     if len(message.command) < 2:
         return await message.reply_text("where you input the username?\n")

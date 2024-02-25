@@ -4,7 +4,7 @@ import requests
 import config
 from Barath import barath
 
-@barath.on_message(filters.user(config.OWNER_ID) & filters.command("write",prefixes=config.HANDLER))
+@barath.on_message(filters.me & filters.command("write",prefixes=config.HANDLER))
 async def handwriting(_, message):
     if len(message.command) < 2:
         return await message.reply_text("» Give some text to write...")

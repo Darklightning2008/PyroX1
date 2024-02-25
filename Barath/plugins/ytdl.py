@@ -14,7 +14,7 @@ from pyrogram.types import *
 from Barath import barath, MODULE
 from config import HANDLER, OWNER_ID, BARATH
 
-@barath.on_message(filters.command("video",prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("video",prefixes=HANDLER) & filters.me)
 async def vsong(client, message):
     ydl_opts = {
         "format": "best",

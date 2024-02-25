@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from Barath import barath
 from config import HANDLER, OWNER_ID
 
-@barath.on_message(filters.command("stats", prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("stats", prefixes=HANDLER) & filters.me)
 async def stats(client: Client, message: Message):
     await message.edit_text("Collecting stats")
     start = datetime.now()

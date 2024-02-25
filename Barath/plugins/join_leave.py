@@ -7,7 +7,7 @@ import asyncio
 
 ASS_USERNAME="LelouchTheZeroo"
 
-@barath.on_message(filters.command("join", prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("join", prefixes=HANDLER) & filters.me)
 async def joinchat(client, message):
     if "@" in message.text:
         Test = message.text.split(" ")
@@ -35,7 +35,7 @@ async def joinchat(client, message):
 
 
 
-@barath.on_message(filters.command("leave", prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("leave", prefixes=HANDLER) & filters.me)
 async def rem(client, message):
     try:
         if len(message.command) > 1:

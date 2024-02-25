@@ -4,7 +4,7 @@ from pyrogram import filters
 from Barath import barath, MODULE
 import config
 
-@barath.on_message(filters.command(["ds"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command(["ds"], prefixes=config.HANDLER) & filters.me)
 async def delay_handler(_, m: Message):
     try:
         reply = m.reply_to_message
@@ -33,7 +33,7 @@ async def delay_handler(_, m: Message):
 
 # For spam command Made by @daanav_asura
 
-@barath.on_message(filters.command(["spam"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command(["spam"], prefixes=config.HANDLER) & filters.me)
 async def spam_handler(_, m: Message):
     try:
         reply = m.reply_to_message
@@ -72,7 +72,7 @@ async def spam_handler(_, m: Message):
         print(e)  # Print the error to the console for debugging purposes
 
 
-@barath.on_message(filters.command(["say"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command(["say"], prefixes=config.HANDLER) & filters.me)
 async def say(_, m: Message):
     chat_id = m.chat.id
     cmd = m.command
@@ -86,7 +86,7 @@ async def say(_, m: Message):
         return
     await barath.send_message(chat_id,text)
 
-@barath.on_message(filters.command(["smsg"], prefixes=config.HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command(["smsg"], prefixes=config.HANDLER) & filters.me)
 async def send_msg(_, m: Message):
     id = int(m.command[1])
     cmd = m.command

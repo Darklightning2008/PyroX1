@@ -18,7 +18,7 @@ def fetch_data(api_url: str, query: str) -> tuple:
     except Exception as e:
         return None, f"An error occurred: {str(e)}"
 
-@barath.on_message(filters.command("bard", HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("bard", HANDLER) & filters.me)
 async def chatgpt5(_, message: Message):
     chat_id = message.chat.id
     message_id = message.id

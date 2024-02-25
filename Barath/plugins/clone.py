@@ -4,7 +4,7 @@ from Barath.barath_db.clone_db import store_profile, get_profile
 
 import config
 
-@barath.on_message(filters.command("cpfp",config.HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command("cpfp",config.HANDLER) & filters.me)
 async def clone(_, message):
     if not message.reply_to_message:
          try:
@@ -38,7 +38,7 @@ async def clone(_, message):
     
     
     
-@barath.on_message(filters.command("savepfp", config.HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command("savepfp", config.HANDLER) & filters.me)
 async def save_pfp(_, message):
       user_id = message.from_user.id
       await message.edit('Saving your information into DB')      
@@ -50,7 +50,7 @@ async def save_pfp(_, message):
       await store_profile(user_id=user_id, profile=photo_id, first_name=first_name, bio=bio)
       return await message.edit("Successfully Saved!")
           
-@barath.on_message(filters.command("rnpfp", config.HANDLER) & filters.user(config.OWNER_ID))
+@barath.on_message(filters.command("rnpfp", config.HANDLER) & filters.me)
 async def return_profile(_, message):
      user_id = message.from_user.id
      if (await get_profile(user_id)) == False:

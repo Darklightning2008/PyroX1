@@ -17,7 +17,7 @@ async def FileType(message):
     else:
          return False
 
-@barath.on_message(filters.command("rename",prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("rename",prefixes=HANDLER) & filters.me)
 async def rename(_, message):
     try:
        filename = message.text.split(None,1)[1]

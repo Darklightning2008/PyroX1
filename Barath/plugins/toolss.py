@@ -26,7 +26,7 @@ headers = {
 }
 
 
-@barath.on_message(filters.command("song",prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("song",prefixes=HANDLER) & filters.me)
 def download_song(_, message):
     query = " ".join(message.command[1:])  
     print(query)
@@ -80,7 +80,7 @@ def download_song(_, message):
     except Exception as e:
         print(e)
 
-@barath.on_message(filters.command("weather",prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("weather",prefixes=HANDLER) & filters.me)
 async def weather(_, m: Message):
     if len(m.command) == 1:
         return await m.reply_text(
@@ -134,7 +134,7 @@ async def weather(_, m: Message):
 
         await msg.edit(res)
 
-@barath.on_message(filters.command("carbon", prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("carbon", prefixes=HANDLER) & filters.me)
 async def carbon(_, m: Message):
     msg = await m.reply_text("Trying...")  # Await here
     if m.reply_to_message:
@@ -182,7 +182,7 @@ async def spacebin(text: str):
 """
     return string
 
-@barath.on_message(filters.command("paste", HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("paste", HANDLER) & filters.me)
 async def paste(_, message):
     # share your codes on https://spacebin.in
     msg = await message.reply_text("Trying...")  # Added await here

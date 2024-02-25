@@ -8,7 +8,7 @@ from gpytranslate import Translator
 import requests
 
 
-@barath.on_message(filters.command(["ud","define"],prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command(["ud","define"],prefixes=HANDLER) & filters.me)
 async def ud(_, message):
         if len(message.command) < 2:
              return await message.edit("where you input the text?")         
@@ -24,7 +24,7 @@ async def ud(_, message):
         
         
 trans = Translator()
-@barath.on_message(filters.command("tr",prefixes=HANDLER) & filters.user(OWNER_ID))
+@barath.on_message(filters.command("tr",prefixes=HANDLER) & filters.me)
 async def translate(_, message) -> None:
     reply_msg = message.reply_to_message
     if not reply_msg:
