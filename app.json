@@ -1,8 +1,8 @@
 {
 "name": "PyroX-V2",
 "description": "Telegram User Bot using Pyrogram formwork",
-"logo": "https://graph.org/file/d2378d747050e2963b95a.jpg",
-"repository": "https://gitHub.com/Vishal-1756/Barath",
+"logo": "https://telegra.ph/file/79a601d92bbff57f523e1.jpg",
+"repository": "https://github.com/TeamX-Coders/PyroX-V2",
 "env": {
     "API_ID": {
       "description": "api id get from my.telegram.org/apps",
