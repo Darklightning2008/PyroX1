@@ -7,9 +7,6 @@ from pyrogram import filters, __version__ as pyrover, enums
 from Barath import barath, get_readable_time, StartTime
 from Barath import bot, MODULE
 
-from Barath.barath_db.counter_db  import get_counter
-from  Barath.plugins.toolss import get_all_toggle_status,get_counters_data
-
 async def alive():
     start_time = time.time()
     katsuki = "3.01"
