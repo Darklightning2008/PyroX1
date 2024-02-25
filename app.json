@@ -1,5 +1,3 @@
-
-
 {
 "name": "Barath",
 "description": "Telegram User Bot using Pyrogram formwork",
@@ -30,7 +28,6 @@
        "description": "Add IDs of owners",
        "value": "5443243540",
        "required": true
-    }
     },
     "GROUP_ID": {
        "description": "Add group ID where bot must be admin and userbot must be there.",
@@ -47,5 +44,5 @@
        "value": "mongodb+srv://publicDB:publicDBbyKira@public.twckcqf.mongodb.net/?retryWrites=true&w=majority",
        "required": true
     }
-
+}
 }
