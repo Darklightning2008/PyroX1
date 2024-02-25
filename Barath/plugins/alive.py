@@ -23,13 +23,13 @@ async def alive():
     ALIVE_TEX = "ɪ ᴀᴍ ᴀʟɪᴠᴇ ᴍᴀꜱᴛᴇʀ"
     EMOTES = ["😍", "💀", "😊", "👋", "🎉", "🔥", "🌟", "💫", "🚀", "🤖", "👻", "👾", "🧡"]
 
-    photo_url = "https://telegra.ph/file/e90d5a6fcca486f10025b.mp4"
+    photo_url = "https://te.legra.ph/file/b2f95ab13cdaf3173e1bc.jpg"
     
     ALIVE_TEXT = f"""{ALIVE_TEX}
 ▰▱▰▱▰▱▰▱▰▱▰▱▰
 
 ➤ <b>ꜱᴛᴀᴛᴜꜱ:</b> {dbhealth}
-➤ <b>ᴠᴇʀꜱɪᴏɴ:</b> {akatsuki}
+➤ <b>ᴠᴇʀꜱɪᴏɴ:</b> {katsuki}
 ➤ <b>ᴜᴘᴛɪᴍᴇ:</b> {uptime}
 ➤ <b>ᴘɪɴɢ:</b> {ping_time} ms
 ➤ <b>Python:</b> {pyrover}
